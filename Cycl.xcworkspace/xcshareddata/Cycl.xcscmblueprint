@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B1A2328ABC820CDE403C603CEE9AF645A14219AF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "1BD24D1837D13D31378D51CE845103CC49996C07" : 9223372036854775807,
+    "B1A2328ABC820CDE403C603CEE9AF645A14219AF" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DF498E14-A359-4AB9-90DB-7CF982336818",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "1BD24D1837D13D31378D51CE845103CC49996C07" : "..\/..",
+    "B1A2328ABC820CDE403C603CEE9AF645A14219AF" : "Cycl\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Cycl",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Cycl.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Saturn-V\/Make-School-Product-University.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1BD24D1837D13D31378D51CE845103CC49996C07"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Saturn-V\/Blaze.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B1A2328ABC820CDE403C603CEE9AF645A14219AF"
+    }
+  ]
+}
