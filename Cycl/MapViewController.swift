@@ -10,24 +10,25 @@ import UIKit
 import GoogleMaps
 import MapKit
 
-protocol HandleMapSearchDelegate {
-    // Drops destination pin and zooms in on map
-    func pinZoom(placemark: MKLocalSearchCompletion)
-}
-
-class ViewController: UIViewController {
-
+class MapViewController: UIViewController {
+    
     let locationManager = CLLocationManager()
     let currentloc: CLLocationCoordinate2D? = nil
     var resultSearchController: UISearchController? = nil
-    
+    var destinationDetails: CLPlacemark? {
+        didSet {
+            print(destinationDetails!)
+            pinZoom(destination: destinationDetails!)
+        }
+    }
+    var mapView: GMSMapView?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupLocationManager()
         setupSearchBarController()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,10 +37,10 @@ class ViewController: UIViewController {
     override func loadView() {
         super.loadView()
     }
-
+    
 }
 
-extension ViewController: CLLocationManagerDelegate {
+extension MapViewController: CLLocationManagerDelegate {
     func setupLocationManager() {
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
@@ -57,22 +58,15 @@ extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let location = locations.first {
-//            let loc: CLLocationCoordinate2D = (location.coordinate)
-
+            //            let loc: CLLocationCoordinate2D = (location.coordinate)
+            
             // Create a GMSCameraPosition that tells the map to display the
             // coordinate -33.86,151.20 at zoom level 6.
             
             let cam = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 16.5)
-            var mapView = GMSMapView.map(withFrame: CGRect.zero, camera: cam)
-            mapView.isMyLocationEnabled = true
+            mapView = GMSMapView.map(withFrame: CGRect.zero, camera: cam)
+            mapView?.isMyLocationEnabled = true
             view = mapView
-            
-            // Creates a marker in the center of the map.
-            //        let marker = GMSMarker()
-            //        marker.position = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
-            //        marker.title = "Sydney"
-            //        marker.snippet = "Australia"
-            //        marker.map = mapView
             
             locationManager.stopUpdatingLocation()
         }
@@ -100,25 +94,34 @@ extension ViewController: CLLocationManagerDelegate {
         // Fancy shit to look pretty
         resultSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
-//      locationSearchTable.handleMapSearchDelegate = self
+        //      locationSearchTable.handleMapSearchDelegate = self
+    }
+    
+    @IBAction func unwindToMapViewController(segue: UIStoryboardSegue) {
+        
+        // for now, simply defining the method is sufficient.
+        // we'll add code later
+        
     }
 }
-//extension ViewController: HandleMapSearch {
-//    func dropPinZoomIn(placemark:MKPlacemark){
-//        // cache the pin
-//        selectedPin = placemark
-//        // clear existing pins
-//        mapView.removeAnnotations(mapView.annotations)
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = placemark.coordinate
-//        annotation.title = placemark.name
-//        if let city = placemark.locality,
-//            let state = placemark.administrativeArea {
-//            annotation.subtitle = "\(city) \(state)"
-//        }
-//        mapView.addAnnotation(annotation)
-//        let span = MKCoordinateSpanMake(0.05, 0.05)
-//        let region = MKCoordinateRegionMake(placemark.coordinate, span)
-//        mapView.setRegion(region, animated: true)
-//}
-//}
+
+extension MapViewController {
+    
+    func pinZoom(destination: CLPlacemark) {
+        print("destination was chosen")
+        
+        //clear existing pins
+        self.mapView?.clear()
+        
+        // Creates a marker in the center of the map.
+        let marker = GMSMarker()
+        marker.position = (destination.location?.coordinate)!
+        marker.title = destination.name
+        marker.map = self.mapView
+        
+        let camera = GMSCameraPosition.camera(withLatitude: (destination.location?.coordinate.latitude)!, longitude: (destination.location?.coordinate.longitude)!, zoom: 10)
+        
+//        mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+//        view = mapView
+    }
+}

@@ -15,25 +15,24 @@ class SearchTableViewController: UITableViewController, MKMapViewDelegate, MKLoc
     var matchingItems:[MKLocalSearchCompletion] = []
     var mapView: GMSMapView? = nil
     var completer = MKLocalSearchCompleter()
-//    var handleMapSearchDelegate:HandleMapSearch? = nil
-    
+    var destinationDetails: CLPlacemark?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         completer.delegate = self
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return matchingItems.count
     }
@@ -50,8 +49,45 @@ class SearchTableViewController: UITableViewController, MKMapViewDelegate, MKLoc
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = matchingItems[indexPath.row]
-//        handleMapSearchDelegate?.dropPinZoomIn(placemark: selectedItem)
-        dismiss(animated: true, completion: nil)
+        var address = ""
+        let firstChar = selectedItem.title.characters.first?.description
+        
+        if Int(firstChar!) != nil {
+            address = selectedItem.subtitle
+        } else {
+            address = "\(selectedItem.title), \(selectedItem.subtitle)"
+        }
+        
+        addressToPlacemark(address: address) { (placemark) in
+            self.destinationDetails = placemark
+            self.performSegue(withIdentifier: "save", sender: self)
+        }
+    }
+    // Segue Functions
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "save" {
+            let destination = segue.destination as! MapViewController
+            destination.destinationDetails = destinationDetails
+        }
+    }
+    
+    
+    // MARK: Destination Location
+    func addressToPlacemark(address: String, callback: @escaping ((CLPlacemark) -> ())) {
+        let geocoder = CLGeocoder()
+        
+        var placemark: CLPlacemark?
+        geocoder.geocodeAddressString(address) {
+            
+            if let placemarks = $0 {
+                placemark = placemarks[0]
+                callback(placemark!)
+            } else {
+                print($1 ?? "$1 has no value.")
+                placemark = nil
+            }
+        }
     }
 }
 extension SearchTableViewController : UISearchResultsUpdating {
@@ -59,9 +95,9 @@ extension SearchTableViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
         let searchBarText = searchController.searchBar.text
-
+        
         completer.queryFragment = searchBarText!
-
+        
         self.matchingItems = self.completer.results
         self.tableView.reloadData()
     }

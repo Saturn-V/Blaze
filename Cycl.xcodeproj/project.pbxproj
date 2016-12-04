@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		41101B13A73C06BF6C725E49 /* Pods_Cycl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80E75B6B023D9F7523A58659 /* Pods_Cycl.framework */; };
 		B43DBF441DEE356F0069430F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF431DEE356F0069430F /* AppDelegate.swift */; };
-		B43DBF461DEE356F0069430F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF451DEE356F0069430F /* ViewController.swift */; };
+		B43DBF461DEE356F0069430F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF451DEE356F0069430F /* MapViewController.swift */; };
 		B43DBF491DEE356F0069430F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B43DBF471DEE356F0069430F /* Main.storyboard */; };
 		B43DBF4C1DEE356F0069430F /* Cycl.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF4A1DEE356F0069430F /* Cycl.xcdatamodeld */; };
 		B43DBF4E1DEE356F0069430F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B43DBF4D1DEE356F0069430F /* Assets.xcassets */; };
 		B43DBF511DEE356F0069430F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B43DBF4F1DEE356F0069430F /* LaunchScreen.storyboard */; };
 		B43DBF591DF0D2B30069430F /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B43DBF581DF0D2B30069430F /* Keys.plist */; };
 		B43DBF691DF0E2BA0069430F /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF681DF0E2BA0069430F /* SearchTableViewController.swift */; };
+		B43DBF6B1DF293710069430F /* MapViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF6A1DF293710069430F /* MapViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +24,7 @@
 		80E75B6B023D9F7523A58659 /* Pods_Cycl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cycl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B43DBF401DEE356F0069430F /* Cycl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cycl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B43DBF431DEE356F0069430F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B43DBF451DEE356F0069430F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B43DBF451DEE356F0069430F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B43DBF481DEE356F0069430F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B43DBF4B1DEE356F0069430F /* Cycl.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cycl.xcdatamodel; sourceTree = "<group>"; };
 		B43DBF4D1DEE356F0069430F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -31,6 +32,7 @@
 		B43DBF521DEE356F0069430F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B43DBF581DF0D2B30069430F /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		B43DBF681DF0E2BA0069430F /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		B43DBF6A1DF293710069430F /* MapViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerDelegate.swift; sourceTree = "<group>"; };
 		E4E6B9F172A256DD0CFCF2DF /* Pods-Cycl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cycl.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cycl/Pods-Cycl.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,7 +96,7 @@
 		B43DBF621DF0E22A0069430F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B43DBF451DEE356F0069430F /* ViewController.swift */,
+				B43DBF451DEE356F0069430F /* MapViewController.swift */,
 				B43DBF681DF0E2BA0069430F /* SearchTableViewController.swift */,
 			);
 			name = Controller;
@@ -110,6 +112,7 @@
 		B43DBF641DF0E2440069430F /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
+				B43DBF6A1DF293710069430F /* MapViewControllerDelegate.swift */,
 			);
 			name = Delegate;
 			sourceTree = "<group>";
@@ -254,7 +257,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B43DBF461DEE356F0069430F /* ViewController.swift in Sources */,
+				B43DBF6B1DF293710069430F /* MapViewControllerDelegate.swift in Sources */,
+				B43DBF461DEE356F0069430F /* MapViewController.swift in Sources */,
 				B43DBF4C1DEE356F0069430F /* Cycl.xcdatamodeld in Sources */,
 				B43DBF441DEE356F0069430F /* AppDelegate.swift in Sources */,
 				B43DBF691DF0E2BA0069430F /* SearchTableViewController.swift in Sources */,
