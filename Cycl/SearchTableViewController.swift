@@ -16,6 +16,7 @@ class SearchTableViewController: UITableViewController, MKMapViewDelegate, MKLoc
     var mapView: GMSMapView? = nil
     var completer = MKLocalSearchCompleter()
     var destinationDetails: CLPlacemark?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,12 +64,12 @@ class SearchTableViewController: UITableViewController, MKMapViewDelegate, MKLoc
             self.performSegue(withIdentifier: "save", sender: self)
         }
     }
-    // Segue Functions
     
+    // Segue Functions
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "save" {
-            let destination = segue.destination as! MapViewController
-            destination.destinationDetails = destinationDetails
+            let mapViewController = segue.destination as! MapViewController
+            mapViewController.destinationDetails = destinationDetails
         }
     }
     
