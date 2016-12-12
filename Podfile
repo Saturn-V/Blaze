@@ -8,5 +8,7 @@ target 'Cycl' do
   # Pods for Cycl
     pod 'GoogleMaps'
     pod 'GooglePlaces'
+    pod 'SwiftyJSON'
+    pod 'Alamofire'
 
 end

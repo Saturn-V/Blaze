@@ -12,16 +12,18 @@ import MapKit
 
 class MapViewController: UIViewController {
     
+    let googleAPIWrapper = GoogleAPIWrapper()
     let locationManager = CLLocationManager()
-    let currentloc: CLLocationCoordinate2D? = nil
+    var currentloc: CLLocation? = nil
     var resultSearchController: UISearchController? = nil
+    var mapView: GMSMapView?
     var destinationDetails: CLPlacemark? {
         didSet {
             print(destinationDetails!)
             pinZoom(destination: destinationDetails!)
         }
     }
-    var mapView: GMSMapView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -58,16 +60,14 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let location = locations.first {
-            //            let loc: CLLocationCoordinate2D = (location.coordinate)
             
             // Create a GMSCameraPosition that tells the map to display the
-            // coordinate -33.86,151.20 at zoom level 6.
+            currentloc = location
             
             let cam = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 16.5)
             mapView = GMSMapView.map(withFrame: CGRect.zero, camera: cam)
             mapView?.isMyLocationEnabled = true
             view = mapView
-            
             locationManager.stopUpdatingLocation()
         }
     }
@@ -119,9 +119,46 @@ extension MapViewController {
         marker.title = destination.name
         marker.map = self.mapView
         
-        let camera = GMSCameraPosition.camera(withLatitude: (destination.location?.coordinate.latitude)!, longitude: (destination.location?.coordinate.longitude)!, zoom: 10)
+        let origin = CLLocationCoordinate2D(latitude: (currentloc?.coordinate.latitude)!, longitude: (currentloc?.coordinate.longitude)!)
+        let bounds = GMSCoordinateBounds(coordinate: origin, coordinate: (destination.location?.coordinate)!)
+        let camera = mapView?.camera(for: bounds, insets: UIEdgeInsets())!
         
-//        mapView = GMSMapView.map(withFrame: .zero, camera: camera)
-//        view = mapView
+        mapView?.camera = camera!
+        
+        let zoom = GMSCameraUpdate.zoomOut()
+        mapView?.animate(with: zoom)
+        
+        let adjust = GMSCameraUpdate.fit(bounds)
+        mapView?.animate(with: adjust)
+        
+        googleAPIWrapper.getRouteData(origin: origin, destination: (destination.location?.coordinate)!, callback: { (routesArray) in
+            
+            let fastestRoute = self.googleAPIWrapper.calculateXRoute(for: .fastest, routesArray: routesArray)
+            
+            let fastestLeastElevationRoute = self.googleAPIWrapper.calculateXRoute(for: .leastElevation, routesArray: routesArray)
+            
+            print("Fastest Route ETA: \(fastestRoute.eta) minutes")
+            print("Fastest Route Elevation Total: \(fastestRoute.elevationTotal) \n")
+            
+            print("Least Steep Route ETA: \(fastestLeastElevationRoute.eta) minutes")
+            print("Least Route Elevation Total: \(fastestLeastElevationRoute.elevationTotal) \n")
+            
+            for route in routesArray {
+                print("Other Route ETA: \(route.eta) minutes")
+                print("Other Route Elevation Total: \(route.elevationTotal) \n")
+                
+                if fastestRoute.eta < route.eta {
+                    print("fastest route is correct \n")
+                }
+                if fastestLeastElevationRoute.elevationTotal < route.elevationTotal {
+                    print("least elevation route is correct \n")
+                }
+            }
+            
+            let polyline = GMSPolyline(path: fastestRoute.path)
+            polyline.strokeWidth = 5.0
+            polyline.geodesic = true
+            polyline.map = self.mapView
+        })
     }
 }

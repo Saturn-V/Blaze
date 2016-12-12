@@ -17,6 +17,9 @@
 		B43DBF591DF0D2B30069430F /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B43DBF581DF0D2B30069430F /* Keys.plist */; };
 		B43DBF691DF0E2BA0069430F /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF681DF0E2BA0069430F /* SearchTableViewController.swift */; };
 		B43DBF6B1DF293710069430F /* MapViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF6A1DF293710069430F /* MapViewControllerDelegate.swift */; };
+		B43DBF751DF791D00069430F /* GoogleAPIWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF741DF791D00069430F /* GoogleAPIWrapper.swift */; };
+		B4AE9F401DFE1C2C00EB089C /* RouteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE9F3F1DFE1C2C00EB089C /* RouteType.swift */; };
+		B4E9319D1DFC96EE0030F906 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E9319C1DFC96EE0030F906 /* Route.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		B43DBF581DF0D2B30069430F /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		B43DBF681DF0E2BA0069430F /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		B43DBF6A1DF293710069430F /* MapViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerDelegate.swift; sourceTree = "<group>"; };
+		B43DBF741DF791D00069430F /* GoogleAPIWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAPIWrapper.swift; sourceTree = "<group>"; };
+		B4AE9F3F1DFE1C2C00EB089C /* RouteType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteType.swift; sourceTree = "<group>"; };
+		B4E9319C1DFC96EE0030F906 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		E4E6B9F172A256DD0CFCF2DF /* Pods-Cycl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cycl.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cycl/Pods-Cycl.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +84,7 @@
 		B43DBF421DEE356F0069430F /* Cycl */ = {
 			isa = PBXGroup;
 			children = (
+				B43DBF731DF791BB0069430F /* Helper */,
 				B43DBF651DF0E24B0069430F /* View */,
 				B43DBF641DF0E2440069430F /* Delegate */,
 				B43DBF631DF0E23F0069430F /* Model */,
@@ -105,6 +112,8 @@
 		B43DBF631DF0E23F0069430F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B4E9319C1DFC96EE0030F906 /* Route.swift */,
+				B4AE9F3F1DFE1C2C00EB089C /* RouteType.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -122,6 +131,14 @@
 			children = (
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		B43DBF731DF791BB0069430F /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				B43DBF741DF791D00069430F /* GoogleAPIWrapper.swift */,
+			);
+			name = Helper;
 			sourceTree = "<group>";
 		};
 		C0CDD3869D9CACDE303A00D5 /* Frameworks */ = {
@@ -262,6 +279,9 @@
 				B43DBF4C1DEE356F0069430F /* Cycl.xcdatamodeld in Sources */,
 				B43DBF441DEE356F0069430F /* AppDelegate.swift in Sources */,
 				B43DBF691DF0E2BA0069430F /* SearchTableViewController.swift in Sources */,
+				B4AE9F401DFE1C2C00EB089C /* RouteType.swift in Sources */,
+				B4E9319D1DFC96EE0030F906 /* Route.swift in Sources */,
+				B43DBF751DF791D00069430F /* GoogleAPIWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

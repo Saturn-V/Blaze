@@ -53,6 +53,8 @@ class SearchTableViewController: UITableViewController, MKMapViewDelegate, MKLoc
         var address = ""
         let firstChar = selectedItem.title.characters.first?.description
         
+        // TODO: Map doesn't seem to properly differentiate between title and subtitle (numeric vs verbal address)
+        
         if Int(firstChar!) != nil {
             address = selectedItem.subtitle
         } else {
