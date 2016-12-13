@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import MapKit
+import ScrollableGraphView
 
 
 class MapViewController: UIViewController {
@@ -31,6 +32,15 @@ class MapViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var routeNameCollectionView: UICollectionView!
     
+    @IBOutlet weak var graphDisplayView: ScrollableGraphView!
+    @IBOutlet weak var graphView: UIView!
+    
+    
+    @IBAction func graphViewClose(_ sender: Any) {
+        graphView.isHidden = true
+        resetGraph()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -39,6 +49,9 @@ class MapViewController: UIViewController {
         setupSearchBarController()
         setupCollectionViews()
         routeTypeView.isHidden = true
+        graphView.isHidden = true
+        
+        resetGraph()
     }
     
     override func didReceiveMemoryWarning() {
@@ -167,11 +180,16 @@ extension MapViewController {
             }
             self.routeTypes["Least Elevation"] = fastestLeastElevationRoute
             self.routeTypes["Fastest"] = fastestRoute
+            
+            
+            
+
             self.collectionView.reloadData()
             self.routeNameCollectionView.reloadData()
             
             self.routeTypeView.isHidden = false
             self.view.bringSubview(toFront: self.routeTypeView)
+            
             
             
             
@@ -277,6 +295,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RouteCollectionViewCell
             cell.etaLabel.text = "\(routeTypes[key]!.eta) min"
             cell.totalElevationLabel.text = "\(routeTypes[key]!.elevationTotal)ft of elevation"
+            cell.mapViewController = self
             print("yo")
             let polyline = GMSPolyline(path: routeTypes[key]!.path)
             polyline.strokeWidth = 5.0
@@ -284,6 +303,45 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             polyline.map = self.mapView
             return cell
         }
+    }
+
+    func createElevationGraph() {
+        
+        graphDisplayView.backgroundFillColor = colorWithHexString(hex: "#333333")
+        
+        graphDisplayView.rangeMax = 50
+        
+        graphDisplayView.lineWidth = 1
+        graphDisplayView.lineColor = colorWithHexString(hex: "#777777")
+        graphDisplayView.lineStyle = ScrollableGraphViewLineStyle.smooth
+        
+        graphDisplayView.shouldFill = true
+        graphDisplayView.fillType = ScrollableGraphViewFillType.gradient
+        graphDisplayView.fillColor = colorWithHexString(hex: "#555555")
+        graphDisplayView.fillGradientType = ScrollableGraphViewGradientType.linear
+        graphDisplayView.fillGradientStartColor = colorWithHexString(hex: "#555555")
+        graphDisplayView.fillGradientEndColor = colorWithHexString(hex: "#444444")
+        
+        graphDisplayView.dataPointSpacing = 80
+        graphDisplayView.dataPointSize = 2
+        graphDisplayView.dataPointFillColor = UIColor.white
+        
+        graphDisplayView.referenceLineLabelFont = UIFont.boldSystemFont(ofSize: 8)
+        graphDisplayView.referenceLineColor = UIColor.white.withAlphaComponent(0.2)
+        graphDisplayView.referenceLineLabelColor = UIColor.white
+        graphDisplayView.dataPointLabelColor = UIColor.white.withAlphaComponent(0.5)
+        
+        let data: [Double] = [4, 8, 15, 16, 23, 42]
+        let labels = ["one", "two", "three", "four", "five", "six"]
+        graphDisplayView.set(data: data, withLabels: labels)
+    
+    }
+    
+    func resetGraph() {
+        // Initialize Graph along with views
+        let data: [Double] = [0]
+        let labels = [""]
+        graphDisplayView.set(data: data, withLabels: labels)
     }
 }
 

@@ -74,13 +74,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5:30pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgZ-m9-kv7">
-                                                            <rect key="frame" x="242" y="18" width="51.5" height="21"/>
+                                                            <rect key="frame" x="242" y="18" width="52" height="21"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45ft of elevation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpn-6M-08N">
-                                                            <rect key="frame" x="134.5" y="128" width="109" height="21"/>
+                                                            <rect key="frame" x="135" y="128" width="109" height="21"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -99,6 +99,15 @@
                                                             <state key="normal" title="GO">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnw-7L-dpQ">
+                                                            <rect key="frame" x="323" y="8" width="46" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                                                            <state key="normal" title="i"/>
+                                                            <connections>
+                                                                <action selector="GraphViewButtonPressed:" destination="Zqy-12-X1N" eventType="touchUpInside" id="hhm-sA-wA2"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </view>
@@ -186,6 +195,37 @@
                                     <constraint firstAttribute="trailing" secondItem="gSh-Cv-DlS" secondAttribute="trailing" id="jXE-jw-PLx"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Hj-Al-pda">
+                                <rect key="frame" x="0.0" y="322" width="375" height="345"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Route Elevation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDE-DZ-l2t">
+                                        <rect key="frame" x="8" y="8" width="359" height="57"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kjt-UB-WX2" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
+                                        <rect key="frame" x="8" y="51" width="359" height="210"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXO-xn-Zqh">
+                                        <rect key="frame" x="8" y="282" width="359" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.15446541878172593" green="0.15446541878172593" blue="0.15446541878172593" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                        <state key="normal" title="DONE">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="graphViewClose:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D9T-il-F90"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.41685834390862941" green="0.41685834390862941" blue="0.41685834390862941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -197,6 +237,8 @@
                     <navigationItem key="navigationItem" id="11Y-MN-UGR"/>
                     <connections>
                         <outlet property="collectionView" destination="gSh-Cv-DlS" id="deT-1o-MUs"/>
+                        <outlet property="graphDisplayView" destination="Kjt-UB-WX2" id="mje-By-dDt"/>
+                        <outlet property="graphView" destination="1Hj-Al-pda" id="fLO-Xy-xb1"/>
                         <outlet property="routeNameCollectionView" destination="VFJ-8R-VaQ" id="qUa-dd-Sm2"/>
                         <outlet property="routeTypeView" destination="Yql-mn-8Kg" id="8v6-gB-4Aj"/>
                     </connections>
@@ -258,7 +300,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sx0-qf-K8P" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bOE-rh-bCQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bOE-rh-bCQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

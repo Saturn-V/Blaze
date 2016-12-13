@@ -10,6 +10,7 @@ target 'Cycl' do
     pod 'GooglePlaces'
     pod 'SwiftyJSON'
     pod 'Alamofire'
+    pod 'ScrollableGraphView'
 end
 
 post_install do |installer|
