@@ -20,6 +20,10 @@
 		B43DBF751DF791D00069430F /* GoogleAPIWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF741DF791D00069430F /* GoogleAPIWrapper.swift */; };
 		B4AE9F401DFE1C2C00EB089C /* RouteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE9F3F1DFE1C2C00EB089C /* RouteType.swift */; };
 		B4E9319D1DFC96EE0030F906 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E9319C1DFC96EE0030F906 /* Route.swift */; };
+		E6084C2E1DFF564300C07E10 /* RouteTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6084C2D1DFF564300C07E10 /* RouteTypeView.swift */; };
+		E6084C7C1E00779A00C07E10 /* LGHorizontalLinearFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6084C7B1E00779A00C07E10 /* LGHorizontalLinearFlowLayout.swift */; };
+		E6084C7E1E0077A000C07E10 /* RouteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6084C7D1E0077A000C07E10 /* RouteCollectionViewCell.swift */; };
+		E6084C801E0077A700C07E10 /* RouteNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6084C7F1E0077A700C07E10 /* RouteNameCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		B4AE9F3F1DFE1C2C00EB089C /* RouteType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteType.swift; sourceTree = "<group>"; };
 		B4E9319C1DFC96EE0030F906 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		E4E6B9F172A256DD0CFCF2DF /* Pods-Cycl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cycl.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cycl/Pods-Cycl.release.xcconfig"; sourceTree = "<group>"; };
+		E6084C2D1DFF564300C07E10 /* RouteTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteTypeView.swift; sourceTree = "<group>"; };
+		E6084C7B1E00779A00C07E10 /* LGHorizontalLinearFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGHorizontalLinearFlowLayout.swift; sourceTree = "<group>"; };
+		E6084C7D1E0077A000C07E10 /* RouteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteCollectionViewCell.swift; sourceTree = "<group>"; };
+		E6084C7F1E0077A700C07E10 /* RouteNameCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteNameCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +122,7 @@
 			children = (
 				B4E9319C1DFC96EE0030F906 /* Route.swift */,
 				B4AE9F3F1DFE1C2C00EB089C /* RouteType.swift */,
+				E6084C2D1DFF564300C07E10 /* RouteTypeView.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -129,6 +138,9 @@
 		B43DBF651DF0E24B0069430F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E6084C7B1E00779A00C07E10 /* LGHorizontalLinearFlowLayout.swift */,
+				E6084C7F1E0077A700C07E10 /* RouteNameCollectionViewCell.swift */,
+				E6084C7D1E0077A000C07E10 /* RouteCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -184,7 +196,7 @@
 				TargetAttributes = {
 					B43DBF3F1DEE356F0069430F = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = CWG8663V7A;
+						DevelopmentTeam = 7QQX7GNST9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -249,7 +261,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		BC531F318156B6A9779CBDA5 /* [CP] Embed Pods Frameworks */ = {
@@ -274,12 +286,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6084C7E1E0077A000C07E10 /* RouteCollectionViewCell.swift in Sources */,
 				B43DBF6B1DF293710069430F /* MapViewControllerDelegate.swift in Sources */,
+				E6084C7C1E00779A00C07E10 /* LGHorizontalLinearFlowLayout.swift in Sources */,
 				B43DBF461DEE356F0069430F /* MapViewController.swift in Sources */,
 				B43DBF4C1DEE356F0069430F /* Cycl.xcdatamodeld in Sources */,
+				E6084C2E1DFF564300C07E10 /* RouteTypeView.swift in Sources */,
 				B43DBF441DEE356F0069430F /* AppDelegate.swift in Sources */,
 				B43DBF691DF0E2BA0069430F /* SearchTableViewController.swift in Sources */,
 				B4AE9F401DFE1C2C00EB089C /* RouteType.swift in Sources */,
+				E6084C801E0077A700C07E10 /* RouteNameCollectionViewCell.swift in Sources */,
 				B4E9319D1DFC96EE0030F906 /* Route.swift in Sources */,
 				B43DBF751DF791D00069430F /* GoogleAPIWrapper.swift in Sources */,
 			);
@@ -405,7 +421,7 @@
 			baseConfigurationReference = 794CACA256F2E341F3CB15C1 /* Pods-Cycl.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CWG8663V7A;
+				DEVELOPMENT_TEAM = 7QQX7GNST9;
 				INFOPLIST_FILE = Cycl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Cycl;
@@ -419,7 +435,7 @@
 			baseConfigurationReference = E4E6B9F172A256DD0CFCF2DF /* Pods-Cycl.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CWG8663V7A;
+				DEVELOPMENT_TEAM = 7QQX7GNST9;
 				INFOPLIST_FILE = Cycl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Cycl;

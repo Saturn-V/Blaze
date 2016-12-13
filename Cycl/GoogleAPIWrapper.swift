@@ -54,9 +54,6 @@ class GoogleAPIWrapper {
                     routeIndex = index
                 }
             }
-
-        default:
-            break
         }
         
         return routesArray[routeIndex!]

@@ -10,11 +10,15 @@ import UIKit
 import GoogleMaps
 import MapKit
 
+
 class MapViewController: UIViewController {
     
     let googleAPIWrapper = GoogleAPIWrapper()
     let locationManager = CLLocationManager()
     var currentloc: CLLocation? = nil
+    
+    lazy var routeTypes : [String: Route] = [:]
+
     var resultSearchController: UISearchController? = nil
     var mapView: GMSMapView?
     var destinationDetails: CLPlacemark? {
@@ -23,12 +27,17 @@ class MapViewController: UIViewController {
             pinZoom(destination: destinationDetails!)
         }
     }
+    @IBOutlet weak var routeTypeView: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var routeNameCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupLocationManager()
         setupSearchBarController()
+        setupCollectionViews()
+        routeTypeView.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,9 +74,10 @@ extension MapViewController: CLLocationManagerDelegate {
             currentloc = location
             
             let cam = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 16.5)
-            mapView = GMSMapView.map(withFrame: CGRect.zero, camera: cam)
+            mapView = GMSMapView.map(withFrame: view.frame, camera: cam)
             mapView?.isMyLocationEnabled = true
-            view = mapView
+            view.addSubview(mapView!)
+            //testing purposes
             locationManager.stopUpdatingLocation()
         }
     }
@@ -154,11 +164,77 @@ extension MapViewController {
                     print("least elevation route is correct \n")
                 }
             }
+            self.routeTypes["Least Elevation"] = fastestLeastElevationRoute
+            self.routeTypes["Fastest"] = fastestRoute
+            self.collectionView.reloadData()
+            self.routeNameCollectionView.reloadData()
+            
+            self.routeTypeView.isHidden = false
+            self.view.bringSubview(toFront: self.routeTypeView)
             
             let polyline = GMSPolyline(path: fastestRoute.path)
             polyline.strokeWidth = 5.0
             polyline.geodesic = true
             polyline.map = self.mapView
+            
         })
     }
 }
+extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+
+    
+    func setupCollectionViews() {
+        routeNameCollectionView.delegate = self
+        routeNameCollectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        routeNameCollectionView.showsHorizontalScrollIndicator = false
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumInteritemSpacing = 0
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
+        collectionView!.collectionViewLayout = layout
+        collectionView.isPagingEnabled = true
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+        if collectionView.isDragging {
+        routeNameCollectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x / CGFloat(2) - CGFloat(105), y: 0)
+        }
+        if translation.x  < 0 {
+            
+            if collectionView.isDragging {
+            routeNameCollectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x / CGFloat(2), y: 0)
+            }
+        } 
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return routeTypes.count
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let keys = Array(routeTypes.keys)
+        let key = keys[indexPath.item]
+        if collectionView == routeNameCollectionView {
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "routeNameCell", for: indexPath) as! RouteNameCollectionViewCell
+            cell.routeNameLabel.text = key
+            
+            return cell
+        }
+        else  {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RouteCollectionViewCell
+            cell.etaLabel.text = "\(routeTypes[key]!.eta) min"
+            cell.totalElevationLabel.text = "\(routeTypes[key]!.elevationTotal)ft of elevation"
+            return cell
+        }
+    }
+}
+
