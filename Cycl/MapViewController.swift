@@ -16,9 +16,9 @@ class MapViewController: UIViewController {
     let googleAPIWrapper = GoogleAPIWrapper()
     let locationManager = CLLocationManager()
     var currentloc: CLLocation? = nil
-    
+    var selectedCell = 0
     lazy var routeTypes : [String: Route] = [:]
-
+    
     var resultSearchController: UISearchController? = nil
     var mapView: GMSMapView?
     var destinationDetails: CLPlacemark? {
@@ -34,6 +34,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        selectedCell = 0
         setupLocationManager()
         setupSearchBarController()
         setupCollectionViews()
@@ -172,16 +173,13 @@ extension MapViewController {
             self.routeTypeView.isHidden = false
             self.view.bringSubview(toFront: self.routeTypeView)
             
-            let polyline = GMSPolyline(path: fastestRoute.path)
-            polyline.strokeWidth = 5.0
-            polyline.geodesic = true
-            polyline.map = self.mapView
+            
             
         })
     }
 }
 extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSource{
-
+    
     
     func setupCollectionViews() {
         routeNameCollectionView.delegate = self
@@ -190,7 +188,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         collectionView.dataSource = self
         routeNameCollectionView.showsHorizontalScrollIndicator = false
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        layout.itemSize = CGSize(width: self.view.frame.width, height: collectionView.frame.height - routeNameCollectionView.frame.height)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
@@ -201,16 +199,63 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         if collectionView.isDragging {
-        routeNameCollectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x / CGFloat(2) - CGFloat(105), y: 0)
+            routeNameCollectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x / CGFloat(2) - CGFloat(105), y: 0)
         }
         if translation.x  < 0 {
             
             if collectionView.isDragging {
-            routeNameCollectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x / CGFloat(2), y: 0)
+                routeNameCollectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x / CGFloat(2), y: 0)
             }
-        } 
+        }
+        findCenterIndex(scrollView)
     }
-
+    
+    func findCenterIndex(_ scrollView: UIScrollView) {
+        let collectionOrigin = routeNameCollectionView!.bounds.origin
+        let collectionWidth = routeNameCollectionView!.bounds.width
+        var centerPoint: CGPoint!
+        var newX: CGFloat!
+        if collectionOrigin.x > 0 {
+            newX = collectionOrigin.x + collectionWidth / 2
+            centerPoint = CGPoint(x: newX, y: collectionOrigin.y)
+        } else {
+            newX = collectionWidth / 2
+            centerPoint = CGPoint(x: newX, y: collectionOrigin.y)
+        }
+        let index = routeNameCollectionView!.indexPathForItem(at: centerPoint)
+        let cell = routeNameCollectionView!.cellForItem(at: IndexPath(item: 0, section: 0)) as? RouteNameCollectionViewCell
+        if(index != nil){
+            let cell = routeNameCollectionView.cellForItem(at: index!) as? RouteNameCollectionViewCell
+            if(cell != nil){
+                selectedCell = (routeNameCollectionView.indexPath(for: cell!)?.item)!
+                }
+            }
+        else if(cell != nil){
+            let actualPosition = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+            for cellView in self.routeNameCollectionView.visibleCells   {
+                let currentCell = cellView as? RouteNameCollectionViewCell
+                
+                if(currentCell == cell! && (selectedCell == 0 || selectedCell == 1) && actualPosition.x > 0){
+                    
+                    selectedCell = (routeNameCollectionView.indexPath(for: cell!)?.item)!
+                    }
+                }
+            }
+        drawOnMap(at: selectedCell)
+        }
+    
+    func drawOnMap(at indexPath: Int) {
+        if routeTypes.count >= 1 {
+        self.mapView?.clear()
+        let keys = Array(routeTypes.keys)
+        let key = keys[indexPath]
+        let polyline = GMSPolyline(path: routeTypes[key]!.path)
+        polyline.strokeWidth = 5.0
+        polyline.geodesic = true
+        polyline.map = self.mapView
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return routeTypes.count
     }
@@ -223,16 +268,20 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         let keys = Array(routeTypes.keys)
         let key = keys[indexPath.item]
         if collectionView == routeNameCollectionView {
-            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "routeNameCell", for: indexPath) as! RouteNameCollectionViewCell
             cell.routeNameLabel.text = key
-            
             return cell
         }
         else  {
+            self.mapView?.clear()
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RouteCollectionViewCell
             cell.etaLabel.text = "\(routeTypes[key]!.eta) min"
             cell.totalElevationLabel.text = "\(routeTypes[key]!.elevationTotal)ft of elevation"
+            print("yo")
+            let polyline = GMSPolyline(path: routeTypes[key]!.path)
+            polyline.strokeWidth = 5.0
+            polyline.geodesic = true
+            polyline.map = self.mapView
             return cell
         }
     }
