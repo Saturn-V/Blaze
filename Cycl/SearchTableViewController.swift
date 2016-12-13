@@ -55,11 +55,12 @@ class SearchTableViewController: UITableViewController, MKMapViewDelegate, MKLoc
         
         // TODO: Map doesn't seem to properly differentiate between title and subtitle (numeric vs verbal address)
         
-        if Int(firstChar!) != nil {
+        if Int(firstChar!) == nil {
             address = selectedItem.subtitle
         } else {
             address = "\(selectedItem.title), \(selectedItem.subtitle)"
         }
+
         
         addressToPlacemark(address: address) { (placemark) in
             self.destinationDetails = placemark
