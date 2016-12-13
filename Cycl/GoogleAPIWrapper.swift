@@ -41,8 +41,8 @@ class GoogleAPIWrapper {
             }
             
         case .leastElevation:
-            for route in 0..<routesArray.count {
-                sortedRoutesArray.append(routesArray[route].elevationTotal)
+            for index in 0..<routesArray.count {
+                sortedRoutesArray.append(routesArray[index].elevationTotal)
             }
             
             sortedRoutesArray.sort()
@@ -100,16 +100,22 @@ class GoogleAPIWrapper {
                     // API Call to Google Maps Elevation API using Alamofire
                     self.getElevationData(endpoint: elevation_api_url, callback: { (elevationData) in
                         
-                        // Callback for when we get the Elevation Data response
+                        // Callback/Closure for when we get the Elevation Data response
                         
                         var elevationPoints = [Int]()
                         
-                        // Loop through Elevation Data at each step of route and append them to array for sorting
+                        // Loop through ElevationData at each step of route and append each elevation of a route to array for sorting
+                        // Convert from Meters to Feet
                         for elevation in 0..<elevationData["results"].count {
-                            elevationPoints.append(elevationData["results"][elevation]["elevation"].int!)
+                            let mToF = elevationData["results"][elevation]["elevation"].double! * 3.281
+                            elevationPoints.append(Int(mToF))
                         }
                         
+                        print("Unsorted Elevation Array: \(elevationPoints) ------------------------")
+                        
                         elevationPoints.sort()
+                        
+                        print("Sorted Elevation Array: \(elevationPoints) ------------------------")
                         
                         // Construct Route Object after getting all necessary data from API's
                         let completeRoute = Route(path: path!, eta: eta, elevationPoints: elevationPoints)
