@@ -188,7 +188,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         collectionView.dataSource = self
         routeNameCollectionView.showsHorizontalScrollIndicator = false
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        layout.itemSize = CGSize(width: self.view.frame.width, height: collectionView.frame.height - routeNameCollectionView.frame.height)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
