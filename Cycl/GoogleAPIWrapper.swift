@@ -20,18 +20,15 @@ class GoogleAPIWrapper {
     func calculateXRoute(for routeType: RouteType, routesArray: [Route]) -> Route {
         
         var routeIndex: Int?
-        
         var sortedRoutesArray: [Int] = []
         
         switch routeType {
-            
         case .fastest:
             for index in 0..<routesArray.count {
                 sortedRoutesArray.append(routesArray[index].eta)
             }
             
             sortedRoutesArray.sort()
-            
             let eta = sortedRoutesArray[0]
             
             for index in 0..<routesArray.count {
@@ -39,12 +36,10 @@ class GoogleAPIWrapper {
                     routeIndex = index
                 }
             }
-            
         case .leastElevation:
             for index in 0..<routesArray.count {
                 sortedRoutesArray.append(routesArray[index].elevationTotal)
             }
-            
             sortedRoutesArray.sort()
             
             let elevationTotal = sortedRoutesArray[0]
@@ -55,9 +50,9 @@ class GoogleAPIWrapper {
                 }
             }
         }
-        
         return routesArray[routeIndex!]
     }
+    
     
     //MARK: Google Maps and Directions API Calls
     
@@ -120,18 +115,11 @@ class GoogleAPIWrapper {
                             elevationPoints.append(Int(mToF))
                         }
                         
-                        print("Unsorted Elevation Array: \(elevationPoints) ------------------------")
-                        
-                        elevationPoints.sort()
-                        
-                        print("Sorted Elevation Array: \(elevationPoints) ------------------------")
-                        
                         // Construct Route Object after getting all necessary data from API's
                         let completeRoute = Route(path: path!, eta: eta, elevationPoints: elevationPoints, destinationAddress: destination)
                         
                         // Append route to array of Route objects
                         routesArray.append(completeRoute)
-                        
                         
                         i += 1
                         
@@ -141,9 +129,7 @@ class GoogleAPIWrapper {
                         }
                     })
                 }
-                
             } else {
-                
                 // U fucked (wo)man u fucked
                 print("Error: \(response.result.error)")
             }
@@ -198,12 +184,10 @@ class GoogleAPIWrapper {
         if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
             keys = NSDictionary(contentsOfFile: path)
         }
-        
         if let dict = keys {
             let apiKey = dict["gmaps"] as? String
             api_key = "key=\(apiKey!)"
         }
-        
         return api_key!
     }
 }

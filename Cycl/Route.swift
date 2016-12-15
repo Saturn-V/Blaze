@@ -25,7 +25,9 @@ class Route {
     }
     
     func getElevationTotal(elevationPoints: [Int]) -> Int {
-        let greatestElevation = elevationPoints.last
+        
+        let sortedElevation = elevationPoints.sorted()
+        let greatestElevation = sortedElevation.last
         
         return greatestElevation!
     }

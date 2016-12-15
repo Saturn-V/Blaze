@@ -18,8 +18,7 @@ class MapViewController: UIViewController {
     let locationManager = CLLocationManager()
     var currentloc: CLLocation? // Store users current location
     var selectedCell = 0
-    lazy var routeTypes : [String: Route] = [:]
-    
+    var routeTypes : [String: Route] = [:]
     var resultSearchController: UISearchController? = nil
     var mapView: GMSMapView?
     var destinationDetails: CLPlacemark? {
@@ -28,6 +27,7 @@ class MapViewController: UIViewController {
             pinZoom(destination: destinationDetails!)
         }
     }
+    
     @IBOutlet weak var routeTypeView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var routeNameCollectionView: UICollectionView!
@@ -348,7 +348,6 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         }
         
         graphDisplayView.set(data: data, withLabels: labels)
-    
     }
     
     func resetGraph() {
