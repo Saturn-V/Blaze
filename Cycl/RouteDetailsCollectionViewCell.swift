@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class RouteDetailsCollectionViewCell: UICollectionViewCell {
     
@@ -37,7 +38,4 @@ class RouteDetailsCollectionViewCell: UICollectionViewCell {
         mapViewController?.createElevationGraph(elevationPoints: elevationPoints)
         mapViewController?.view.bringSubview(toFront: (mapViewController?.graphView)!)
     }
-    
-    
-    
 }
