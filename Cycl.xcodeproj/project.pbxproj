@@ -193,7 +193,7 @@
 				TargetAttributes = {
 					B43DBF3F1DEE356F0069430F = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = CWG8663V7A;
+						DevelopmentTeam = 7QQX7GNST9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -417,7 +417,7 @@
 			baseConfigurationReference = 794CACA256F2E341F3CB15C1 /* Pods-Cycl.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CWG8663V7A;
+				DEVELOPMENT_TEAM = 7QQX7GNST9;
 				INFOPLIST_FILE = Cycl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Cycl;
@@ -431,7 +431,7 @@
 			baseConfigurationReference = E4E6B9F172A256DD0CFCF2DF /* Pods-Cycl.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CWG8663V7A;
+				DEVELOPMENT_TEAM = 7QQX7GNST9;
 				INFOPLIST_FILE = Cycl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Cycl;

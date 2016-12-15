@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class RouteCollectionViewCell: UICollectionViewCell {
     
@@ -35,5 +36,14 @@ class RouteCollectionViewCell: UICollectionViewCell {
         mapViewController?.createElevationGraph(elevationPoints: elevationPoints)
         mapViewController?.view.bringSubview(toFront: (mapViewController?.graphView)!)
     }
-    
+    @IBAction func goButtonPressed(_ sender: Any) {
+        
+        let location = mapViewController?.destinationDetails?.location?.coordinate
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            UIApplication.shared.openURL(URL(string:
+                "comgooglemaps://?saddr=&daddr=\(location!.latitude),\(location!.longitude)&directionsmode=biking")!)
+        } else {
+            NSLog("Can't use comgooglemaps://");
+        }
+    }
 }
