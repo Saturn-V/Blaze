@@ -59,55 +59,64 @@ class GoogleAPIWrapper {
         return routesArray[routeIndex!]
     }
     
-    //MARK: Get JSON Functions
+    //MARK: Google Maps and Directions API Calls
     
     func getRouteData(origin: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, callback: @escaping ([Route]) -> ()) {
         
-        // URL to Google Maps Directions API
+        // Construct URL for Google Maps API
         let api_url = makeRouteURL(origin: origin, dest: destination)
         
-        // Array to store all routes returned from API Call
+        // Array to store all Route objects constructed for every route in response
         var routesArray: [Route] = []
+        
         var i = 0
-        // API Call to Google Maps Directions API using Alamofire
+        // API Call to Google Maps API
         Alamofire.request(api_url, method: .get).responseJSON { response in
-            // Check if result is success
+            // Closure for when we get the API response
+            
+            // Check response successfuly arrived
             if response.result.isSuccess {
                 
-                // Use Swift JSON to get some sexy ass JSON ;-]
+                // Use Swifty JSON to make JSON legible
                 let json = JSON(value: response.result.value!)
                 
-                let routes = json["routes"]
-                print("JSON ROUTES ammount: \(routes.count)")
-                // Loop through all the routes returned from API Call and create ROute Objects
-                for route in 0..<routes.count {
+                // Store routes JSON from response
+                let routesJson = json["routes"]
+                
+                print("JSON ROUTES ammount: \(routesJson.count)")
+                
+                // Loop through each route in response | Construct Route objects from JSON route
+                for route in 0..<routesJson.count {
                     
-                    // Segments of routes' path
-                    let steps = routes[route]["legs"][0]["steps"]
+                    // Store "Segments" of routes' path
+                    let steps = routesJson[route]["legs"][0]["steps"]
                     
-                    // Encoded polyline string for displaying overviw of route
-                    let pathString = routes[route]["overview_polyline"]["points"].string!
+                    // Store encoded polyline for displaying overviw of route on map
+                    let pathString = routesJson[route]["overview_polyline"]["points"].string!
                     
-                    // Path to be drawn on map
+                    // Store destination Address
+                    let destination = routesJson[0]["legs"][0]["end_address"].string!
+                    
+                    // Construct Path to be drawn on map from encoded polyline
                     let path = GMSPath(fromEncodedPath: pathString)
                     
-                    // Estimated Time of Arrival for every route (member we looping fam) in minutes
-                    let eta = routes[route]["legs"][0]["duration"]["value"].int!/60
+                    // Store ETA of route in minutes
+                    let eta = routesJson[route]["legs"][0]["duration"]["value"].int!/60
                     
-                    // URL to Google Maps Elevation API
+                    // Construct URL for Google Elevation API
                     let elevation_api_url = self.makeElevationURL(path: path!.encodedPath(), samples: steps.count)
                     
-                    // API Call to Google Maps Elevation API using Alamofire
+                    // API Call to Google Elevation API
                     self.getElevationData(endpoint: elevation_api_url, callback: { (elevationData) in
-                        
-                        // Callback/Closure for when we get the Elevation Data response
-                        
+                        // Closure for when we get the API response
+                            
+                        // Store elevation points of route
                         var elevationPoints = [Int]()
                         
-                        // Loop through ElevationData at each step of route and append each elevation of a route to array for sorting
-                        // Convert from Meters to Feet
-                        for elevation in 0..<elevationData["results"].count {
-                            let mToF = elevationData["results"][elevation]["elevation"].double! * 3.281
+                        // Loop through each Elevation Point in response | Append Elevation Point to 'elevationPoints'
+                        // Convert Meters to Feet
+                        for index in 0..<elevationData["results"].count {
+                            let mToF = elevationData["results"][index]["elevation"].double! * 3.281
                             elevationPoints.append(Int(mToF))
                         }
                         
@@ -118,21 +127,19 @@ class GoogleAPIWrapper {
                         print("Sorted Elevation Array: \(elevationPoints) ------------------------")
                         
                         // Construct Route Object after getting all necessary data from API's
-                        let completeRoute = Route(path: path!, eta: eta, elevationPoints: elevationPoints)
+                        let completeRoute = Route(path: path!, eta: eta, elevationPoints: elevationPoints, destinationAddress: destination)
                         
                         // Append route to array of Route objects
                         routesArray.append(completeRoute)
-
-
+                        
+                        
                         i += 1
                         
-                        if i == routes.count {
+                        if i == routesJson.count {
                             callback(routesArray)
                             print("Routes objects count: \(routesArray.count)")
                         }
                     })
-
-                    
                 }
                 
             } else {
@@ -145,6 +152,8 @@ class GoogleAPIWrapper {
     
     func getElevationData(endpoint: String, callback: @escaping (JSON) -> ()) {
         Alamofire.request(endpoint, method: .get).responseJSON { response in
+            
+            // Check response successfuly arrived
             if response.result.isSuccess {
                 let json = JSON(value: response.result.value!)
                 callback(json)
@@ -164,17 +173,9 @@ class GoogleAPIWrapper {
         let api_mode = "mode=bicycling"
         let api_alt = "alternatives=true"
         
-        var api_key: String?
-        var keys: NSDictionary?
-        
-        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
-            keys = NSDictionary(contentsOfFile: path)
-        }
-        if let dict = keys {
-            let apiKey = dict["gmaps"] as? String
-            api_key = "key=\(apiKey!)"
-        }
-        let api_url = "\(api)\(api_origin)&\(api_destination)&\(api_mode)&\(api_alt)&\(api_key!)"
+        let api_key = getMapsAPIKey()
+ 
+        let api_url = "\(api)\(api_origin)&\(api_destination)&\(api_mode)&\(api_alt)&\(api_key)"
         
         return api_url
     }
@@ -182,16 +183,27 @@ class GoogleAPIWrapper {
     func makeElevationURL(path: String, samples: Int) -> String {
         let api = "https://maps.googleapis.com/maps/api/elevation/json?"
         let api_path = "path=enc:\(path)"
+        
+        let api_key = getMapsAPIKey()
+        
+        let api_url = "\(api)\(api_path)&samples=\(samples)&\(api_key)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        return api_url!
+    }
+    
+    func getMapsAPIKey() -> String {
+        
         var api_key: String?
         var keys: NSDictionary?
+        
         if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
             keys = NSDictionary(contentsOfFile: path)
         }
+        
         if let dict = keys {
             let apiKey = dict["gmaps"] as? String
             api_key = "key=\(apiKey!)"
         }
-        let api_url = "\(api)\(api_path)&samples=\(samples)&\(api_key!)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        return api_url!
+        
+        return api_key!
     }
 }

@@ -14,9 +14,9 @@ import ScrollableGraphView
 
 class MapViewController: UIViewController {
     
-    let googleAPIWrapper = GoogleAPIWrapper()
+    let googleAPIWrapper = GoogleAPIWrapper() // To access GoogleAPIWrapper methods
     let locationManager = CLLocationManager()
-    var currentloc: CLLocation? = nil
+    var currentloc: CLLocation? // Store users current location
     var selectedCell = 0
     lazy var routeTypes : [String: Route] = [:]
     
@@ -66,8 +66,10 @@ class MapViewController: UIViewController {
 }
 
 extension MapViewController: CLLocationManagerDelegate {
+    
     func setupLocationManager() {
-        // Ask for Authorisation from the User.
+        
+        // Ask for Authorization from the User
         self.locationManager.requestAlwaysAuthorization()
         
         // For use in foreground
@@ -91,12 +93,14 @@ extension MapViewController: CLLocationManagerDelegate {
             mapView = GMSMapView.map(withFrame: view.frame, camera: cam)
             mapView?.isMyLocationEnabled = true
             view.addSubview(mapView!)
-            //testing purposes
+            
+            // Stop getting Current Location once it has been found once
             locationManager.stopUpdatingLocation()
         }
     }
     
     func setupSearchBarController() {
+        
         // Instantiate Search Table Controller over Map View Controller with Storyboard ID
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! SearchTableViewController
         
@@ -296,6 +300,8 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             cell.etaLabel.text = "\(routeTypes[key]!.eta) min"
             cell.totalElevationLabel.text = "\(routeTypes[key]!.elevationTotal)ft of elevation"
             cell.mapViewController = self
+            cell.elevationPoints = routeTypes[key]!.elevationPoints
+            cell.destinationAddress = routeTypes[key]?.destinationAddress
             print("yo")
             let polyline = GMSPolyline(path: routeTypes[key]!.path)
             polyline.strokeWidth = 5.0
@@ -305,7 +311,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         }
     }
 
-    func createElevationGraph() {
+    func createElevationGraph(elevationPoints: [Int]) {
         
         graphDisplayView.backgroundFillColor = colorWithHexString(hex: "#333333")
         
@@ -331,8 +337,16 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         graphDisplayView.referenceLineLabelColor = UIColor.white
         graphDisplayView.dataPointLabelColor = UIColor.white.withAlphaComponent(0.5)
         
-        let data: [Double] = [4, 8, 15, 16, 23, 42]
-        let labels = ["one", "two", "three", "four", "five", "six"]
+        graphDisplayView.shouldAutomaticallyDetectRange = true
+        
+        var data = [Double]()
+        var labels = [String]()
+        
+        for index in 0..<elevationPoints.count {
+            data.append(Double(elevationPoints[index]))
+            labels.append(String(index))
+        }
+        
         graphDisplayView.set(data: data, withLabels: labels)
     
     }

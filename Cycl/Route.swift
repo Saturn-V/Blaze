@@ -14,16 +14,17 @@ class Route {
     var elevationPoints: [Int]
     var elevationTotal: Int = 0
     var path: GMSPath?
+    var destinationAddress: String?
     
-    init(path: GMSPath, eta: Int, elevationPoints: [Int]) {
+    init(path: GMSPath, eta: Int, elevationPoints: [Int], destinationAddress: String) {
         self.path = path
         self.eta = eta
         self.elevationPoints = elevationPoints
         self.elevationTotal = getElevationTotal(elevationPoints: elevationPoints)
+        self.destinationAddress = destinationAddress
     }
     
     func getElevationTotal(elevationPoints: [Int]) -> Int {
-//        let leastElevation = elevationPoints[0]
         let greatestElevation = elevationPoints.last
         
         return greatestElevation!

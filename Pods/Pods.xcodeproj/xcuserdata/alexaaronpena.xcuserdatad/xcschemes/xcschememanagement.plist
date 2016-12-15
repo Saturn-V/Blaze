@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ScrollableGraphView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4DD238D1835A9A5655FED2960154C610</key>
+		<key>2D9F102E497E65FC379C4AE714560F43</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>874E54CFC0AAD7B91E4C581723FAB24E</key>
+		<key>5379C48B15103312056262F84E14B034</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,12 +42,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8D2B3CD4FC7D34956C8D4C7F490DAE66</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B1A35A2D648B2F3ADDF68F2E31973D26</key>
+		<key>8F30E1E723AECE49012616525F68783C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
