@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RouteCollectionViewCell: UICollectionViewCell {
+class RouteDetailsCollectionViewCell: UICollectionViewCell {
     
     var mapViewController: MapViewController?
     
@@ -19,14 +19,16 @@ class RouteCollectionViewCell: UICollectionViewCell {
     
     
     @IBAction func navigateButtonPressed(_ sender: Any) {
-        let testURL = URL(string: "comgooglemaps-x-callback://")!
-        if UIApplication.shared.canOpenURL(testURL) {
-            let directionsRequest = "comgooglemaps-x-callback://?" + "daddr=\(destinationAddress)"
+        
+        let location = mapViewController?.destinationDetails?.location?.coordinate
+        
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            // UIApplication.shared.open(<#T##url: URL##URL#>, options: <#T##[String : Any]#>, completionHandler: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
             
-            let directionsURL = URL(string: directionsRequest)!
-            UIApplication.shared.open(directionsURL)
+            UIApplication.shared.open(URL(string:
+                "comgooglemaps://?saddr=&daddr=\(location!.latitude),\(location!.longitude)&directionsmode=biking")!)
         } else {
-            NSLog("Can't use comgooglemaps-x-callback:// on this device.")
+            NSLog("Can't use comgooglemaps://");
         }
     }
     
@@ -35,5 +37,7 @@ class RouteCollectionViewCell: UICollectionViewCell {
         mapViewController?.createElevationGraph(elevationPoints: elevationPoints)
         mapViewController?.view.bringSubview(toFront: (mapViewController?.graphView)!)
     }
+    
+    
     
 }

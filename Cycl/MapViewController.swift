@@ -28,13 +28,15 @@ class MapViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var routeTypeView: UIView!
-    @IBOutlet weak var collectionView: UICollectionView!
+    
+    
     @IBOutlet weak var routeNameCollectionView: UICollectionView!
     
+    @IBOutlet weak var routeDetailsCollectionView: UICollectionView!
     @IBOutlet weak var graphDisplayView: ScrollableGraphView!
     @IBOutlet weak var graphView: UIView!
     
+    @IBOutlet weak var routeView: UIView!
     
     @IBAction func graphViewClose(_ sender: Any) {
         graphView.isHidden = true
@@ -47,8 +49,8 @@ class MapViewController: UIViewController {
         selectedCell = 0
         setupLocationManager()
         setupSearchBarController()
-        setupCollectionViews()
-        routeTypeView.isHidden = true
+        setupRouteCollectionViews()
+        routeView.isHidden = true
         graphView.isHidden = true
         
         resetGraph()
@@ -188,11 +190,11 @@ extension MapViewController {
             
             
 
-            self.collectionView.reloadData()
+            self.routeDetailsCollectionView.reloadData()
             self.routeNameCollectionView.reloadData()
             
-            self.routeTypeView.isHidden = false
-            self.view.bringSubview(toFront: self.routeTypeView)
+            self.routeView.isHidden = false
+            self.view.bringSubview(toFront: self.routeView)
             
             
             
@@ -203,40 +205,55 @@ extension MapViewController {
 extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     
-    func setupCollectionViews() {
+    func setupRouteCollectionViews() {
+        // Setup Delegate and Data Source for routeNameCollectionView
         routeNameCollectionView.delegate = self
         routeNameCollectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.dataSource = self
         routeNameCollectionView.showsHorizontalScrollIndicator = false
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: self.view.frame.width, height: collectionView.frame.height - routeNameCollectionView.frame.height)
+        
+        // Setting up custom collectionViewLayout for routeDetailsCollectionView bc pretty
+        let layout = UICollectionViewFlowLayout()
+        let layoutPadding = routeNameCollectionView.frame.height
+        
+        layout.itemSize = CGSize(width: self.view.frame.width, height: routeDetailsCollectionView.frame.height - layoutPadding)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
-        collectionView!.collectionViewLayout = layout
-        collectionView.isPagingEnabled = true
+        
+        // Set collectionViewLayout to be the custom one we made above
+        routeDetailsCollectionView!.collectionViewLayout = layout
+        
+        // Setup Delegate and Data Source for routeDetailsCollectionView
+        routeDetailsCollectionView.delegate = self
+        routeDetailsCollectionView.dataSource = self
+        routeDetailsCollectionView.isPagingEnabled = true
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
-        if collectionView.isDragging {
-            routeNameCollectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x / CGFloat(2) - CGFloat(105), y: 0)
+        
+        if routeDetailsCollectionView.isDragging {
+            routeNameCollectionView.contentOffset = CGPoint(x: routeDetailsCollectionView.contentOffset.x / CGFloat(2) - CGFloat(105), y: 0)
         }
+        
         if translation.x  < 0 {
-            
-            if collectionView.isDragging {
-                routeNameCollectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x / CGFloat(2), y: 0)
+            if routeDetailsCollectionView.isDragging {
+                routeNameCollectionView.contentOffset = CGPoint(x: routeDetailsCollectionView.contentOffset.x / CGFloat(2), y: 0)
             }
         }
+        
         findCenterIndex(scrollView)
     }
     
     func findCenterIndex(_ scrollView: UIScrollView) {
+        
         let collectionOrigin = routeNameCollectionView!.bounds.origin
         let collectionWidth = routeNameCollectionView!.bounds.width
         var centerPoint: CGPoint!
         var newX: CGFloat!
+        
         if collectionOrigin.x > 0 {
             newX = collectionOrigin.x + collectionWidth / 2
             centerPoint = CGPoint(x: newX, y: collectionOrigin.y)
@@ -244,40 +261,44 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             newX = collectionWidth / 2
             centerPoint = CGPoint(x: newX, y: collectionOrigin.y)
         }
+        
         let index = routeNameCollectionView!.indexPathForItem(at: centerPoint)
         let cell = routeNameCollectionView!.cellForItem(at: IndexPath(item: 0, section: 0)) as? RouteNameCollectionViewCell
-        if(index != nil){
+        
+        if (index != nil) {
             let cell = routeNameCollectionView.cellForItem(at: index!) as? RouteNameCollectionViewCell
-            if(cell != nil){
+            if (cell != nil) {
                 selectedCell = (routeNameCollectionView.indexPath(for: cell!)?.item)!
-                }
             }
-        else if(cell != nil){
+        } else if (cell != nil) {
             let actualPosition = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
-            for cellView in self.routeNameCollectionView.visibleCells   {
+            for cellView in self.routeNameCollectionView.visibleCells {
                 let currentCell = cellView as? RouteNameCollectionViewCell
                 
-                if(currentCell == cell! && (selectedCell == 0 || selectedCell == 1) && actualPosition.x > 0){
-                    
+                if (currentCell == cell! && (selectedCell == 0 || selectedCell == 1) && actualPosition.x > 0) {
                     selectedCell = (routeNameCollectionView.indexPath(for: cell!)?.item)!
-                    }
                 }
             }
-        drawOnMap(at: selectedCell)
         }
+        
+        drawOnMap(at: selectedCell)
+        
+    }
     
     func drawOnMap(at indexPath: Int) {
+        // If routeTypes array now contains the routes, display the map the collectionView index is currently on
         if routeTypes.count >= 1 {
-        self.mapView?.clear()
-        let keys = Array(routeTypes.keys)
-        let key = keys[indexPath]
-        let polyline = GMSPolyline(path: routeTypes[key]!.path)
-        polyline.strokeWidth = 5.0
-        polyline.geodesic = true
-        polyline.map = self.mapView
+            self.mapView?.clear()
+            let keys = Array(routeTypes.keys)
+            let key = keys[indexPath]
+            let polyline = GMSPolyline(path: routeTypes[key]!.path)
+            polyline.strokeWidth = 5.0
+            polyline.geodesic = true
+            polyline.map = self.mapView
         }
     }
     
+    //
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return routeTypes.count
     }
@@ -285,32 +306,49 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let keys = Array(routeTypes.keys)
-        let key = keys[indexPath.item]
+        // Cast the keys of routeTypes dict into its own array because they keys are the route types' title
+        let routeTitles = Array(routeTypes.keys)
+        
+        // Set the current route's title
+        let currentRouteTitle = routeTitles[indexPath.item]
+        
+        // Do stuff for the routeNameCollectionView Cell
         if collectionView == routeNameCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "routeNameCell", for: indexPath) as! RouteNameCollectionViewCell
-            cell.routeNameLabel.text = key
+            cell.routeNameLabel.text = currentRouteTitle
+            
             return cell
-        }
-        else  {
+        } else {
+            
+            // Do stuff for the routeDetailsCollectionView Cell
             self.mapView?.clear()
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RouteCollectionViewCell
-            cell.etaLabel.text = "\(routeTypes[key]!.eta) min"
-            cell.totalElevationLabel.text = "\(routeTypes[key]!.elevationTotal)ft of elevation"
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "routeDetailsCell", for: indexPath) as! RouteDetailsCollectionViewCell
+            
             cell.mapViewController = self
-            cell.elevationPoints = routeTypes[key]!.elevationPoints
-            cell.destinationAddress = routeTypes[key]?.destinationAddress
-            print("yo")
-            let polyline = GMSPolyline(path: routeTypes[key]!.path)
+            cell.etaLabel.text = "\(routeTypes[currentRouteTitle]!.eta) min"
+            cell.totalElevationLabel.text = "\(routeTypes[currentRouteTitle]!.elevationTotal)ft of elevation"
+            
+            // Set properties in the cell to pass into the graphView
+            cell.elevationPoints = routeTypes[currentRouteTitle]!.elevationPoints
+            cell.destinationAddress = routeTypes[currentRouteTitle]?.destinationAddress
+            
+            // Create the polyline to draw on the map for the route
+            let polyline = GMSPolyline(path: routeTypes[currentRouteTitle]!.path)
+            
             polyline.strokeWidth = 5.0
             polyline.geodesic = true
             polyline.map = self.mapView
+            
             return cell
         }
     }
 
+    
+    // MARK: Create a graph method
     func createElevationGraph(elevationPoints: [Int]) {
         
         graphDisplayView.backgroundFillColor = colorWithHexString(hex: "#333333")
@@ -342,6 +380,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         var data = [Double]()
         var labels = [String]()
         
+        // Set labels to number of points in elevation
         for index in 0..<elevationPoints.count {
             data.append(Double(elevationPoints[index]))
             labels.append(String(index))
@@ -350,6 +389,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         graphDisplayView.set(data: data, withLabels: labels)
     }
     
+    // MARK: Initialize and Reset the graph's data
     func resetGraph() {
         // Initialize Graph along with views
         let data: [Double] = [0]

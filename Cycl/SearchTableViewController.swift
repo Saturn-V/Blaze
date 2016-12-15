@@ -12,15 +12,15 @@ import GoogleMaps
 
 class SearchTableViewController: UITableViewController, MKMapViewDelegate, MKLocalSearchCompleterDelegate {
     
-    var matchingItems:[MKLocalSearchCompletion] = []
+    var results = [MKLocalSearchCompletion]()
     var mapView: GMSMapView? = nil
-    var completer = MKLocalSearchCompleter()
+    var searchBar = MKLocalSearchCompleter()
     var destinationDetails: CLPlacemark?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        completer.delegate = self
+        searchBar.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,19 +29,18 @@ class SearchTableViewController: UITableViewController, MKMapViewDelegate, MKLoc
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return matchingItems.count
+        return results.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         
         // Configure the cell...
-        let selectedItem = matchingItems[indexPath.row]
+        let selectedItem = results[indexPath.row]
         cell.textLabel?.text = selectedItem.title
         cell.detailTextLabel?.text = selectedItem.subtitle
         
@@ -49,7 +48,7 @@ class SearchTableViewController: UITableViewController, MKMapViewDelegate, MKLoc
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedItem = matchingItems[indexPath.row]
+        let selectedItem = results[indexPath.row]
         var address = ""
         let firstChar = selectedItem.title.characters.first?.description
         
@@ -68,7 +67,7 @@ class SearchTableViewController: UITableViewController, MKMapViewDelegate, MKLoc
         }
     }
     
-    // Segue Functions
+    // MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "save" {
             let mapViewController = segue.destination as! MapViewController
@@ -100,9 +99,9 @@ extension SearchTableViewController : UISearchResultsUpdating {
         
         let searchBarText = searchController.searchBar.text
         
-        completer.queryFragment = searchBarText!
+        searchBar.queryFragment = searchBarText!
         
-        self.matchingItems = self.completer.results
+        self.results = self.searchBar.results
         self.tableView.reloadData()
     }
 }

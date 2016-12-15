@@ -82,7 +82,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Zqy-12-X1N" customClass="RouteCollectionViewCell" customModule="Cycl" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="routeDetailsCell" id="Zqy-12-X1N" customClass="RouteDetailsCollectionViewCell" customModule="Cycl" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="34.5" width="377" height="216"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -260,11 +260,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="11Y-MN-UGR"/>
                     <connections>
-                        <outlet property="collectionView" destination="gSh-Cv-DlS" id="deT-1o-MUs"/>
                         <outlet property="graphDisplayView" destination="Kjt-UB-WX2" id="mje-By-dDt"/>
                         <outlet property="graphView" destination="1Hj-Al-pda" id="fLO-Xy-xb1"/>
+                        <outlet property="routeDetailsCollectionView" destination="gSh-Cv-DlS" id="dfs-Ai-uPW"/>
                         <outlet property="routeNameCollectionView" destination="VFJ-8R-VaQ" id="qUa-dd-Sm2"/>
-                        <outlet property="routeTypeView" destination="Yql-mn-8Kg" id="8v6-gB-4Aj"/>
+                        <outlet property="routeView" destination="Yql-mn-8Kg" id="7as-aB-fNX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
