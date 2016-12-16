@@ -28,8 +28,10 @@ class Route {
         
         let sortedElevation = elevationPoints.sorted()
         let greatestElevation = sortedElevation.last
-        
+        if greatestElevation != nil {
         return greatestElevation!
+        }
+        return 0
     }
     
     func calc() {

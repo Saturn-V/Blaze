@@ -131,19 +131,13 @@ extension MapViewController {
         //clear existing pins
         self.mapView?.clear()
         
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = (destination.location?.coordinate)!
-        marker.title = destination.name
-        marker.map = self.mapView
-        
         let origin = CLLocationCoordinate2D(latitude: (currentloc?.coordinate.latitude)!, longitude: (currentloc?.coordinate.longitude)!)
         let bounds = GMSCoordinateBounds(coordinate: origin, coordinate: (destination.location?.coordinate)!)
         let camera = mapView?.camera(for: bounds, insets: UIEdgeInsets())!
         
         mapView?.camera = camera!
         
-        let zoom = GMSCameraUpdate.zoomOut()
+        let zoom = GMSCameraUpdate.fit(bounds, withPadding: 5)
         mapView?.animate(with: zoom)
         
         let adjust = GMSCameraUpdate.fit(bounds)
@@ -172,6 +166,13 @@ extension MapViewController {
                     print("least elevation route is correct \n")
                 }
             }
+            
+            // Creates a marker in the center of the map.
+            let marker = GMSMarker()
+            marker.position = (self.destinationDetails?.location?.coordinate)!
+            marker.title = self.destinationDetails?.name
+            marker.map = self.mapView
+
             self.routeTypes["Least Elevation"] = fastestLeastElevationRoute
             self.routeTypes["Fastest"] = fastestRoute
             
@@ -179,9 +180,14 @@ extension MapViewController {
             self.routeNameCollectionView.reloadData()
             
             self.routeView.isHidden = false
+            
+            //set proper frame for mapview
+            let viewFrame = self.view.frame
+            let navHeight = self.navigationController?.navigationBar.frame.height
+            marker.map?.frame = CGRect(x: 0, y: navHeight!, width: viewFrame.width, height: viewFrame.height - self.routeView.frame.height - navHeight!)
             self.view.bringSubview(toFront: self.routeView)
             
-            self.whereToButton.setTitle(self.destinationDetails!.name, for: .normal)
+            self.whereToButton.setTitle("  \(self.destinationDetails!.name!)", for: .normal)
         })
     }
 }
@@ -197,15 +203,15 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         // Setup Delegate and Data Source for routeDetailsCollectionView
         routeDetailsCollectionView.delegate = self
         routeDetailsCollectionView.dataSource = self
-        routeDetailsCollectionView.isPagingEnabled = true
+        routeDetailsCollectionView.isPagingEnabled = false
         
-        routeDetailsCollectionView.frame = routeView.frame
+        routeDetailsCollectionView.frame = CGRect(x: routeDetailsCollectionView.frame.origin.x, y: routeDetailsCollectionView.frame.origin.y, width: self.view.frame.width, height: routeDetailsCollectionView.frame.height)
         
         // Setting up custom collectionViewLayout for routeDetailsCollectionView bc pretty
         let layout = UICollectionViewFlowLayout()
        // let layoutPadding = routeNameCollectionView.frame.height
         
-        layout.itemSize = CGSize(width: self.view.frame.width, height: routeDetailsCollectionView.frame.height)
+        layout.itemSize = CGSize(width: routeDetailsCollectionView.frame.width, height: self.routeView.frame.height)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
@@ -221,11 +227,16 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         
         if routeDetailsCollectionView.isDragging {
+            var layout = UICollectionViewFlowLayout()
+            // let layoutPadding = routeNameCollectionView.frame.height
             routeNameCollectionView.contentOffset = CGPoint(x: routeDetailsCollectionView.contentOffset.x / CGFloat(2) - CGFloat(105), y: 0)
         }
         
         if translation.x  < 0 {
             if routeDetailsCollectionView.isDragging {
+                if routeNameCollectionView.frame.midX == self.view.frame.midX {
+                    print("name is in the middle")
+                }
                 routeNameCollectionView.contentOffset = CGPoint(x: routeDetailsCollectionView.contentOffset.x / CGFloat(2), y: 0)
             }
         }
@@ -265,9 +276,8 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
                 }
             }
         }
-        
+
         drawOnMap(at: selectedCell)
-        
     }
     
     func drawOnMap(at indexPath: Int) {
@@ -280,10 +290,15 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             polyline.strokeWidth = 5.0
             polyline.geodesic = true
             polyline.map = self.mapView
+            
+            // Creates a marker in the center of the map.
+            let marker = GMSMarker()
+            marker.position = (self.destinationDetails?.location?.coordinate)!
+            marker.title = self.destinationDetails?.name
+            marker.map = self.mapView
         }
     }
     
-    //
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return routeTypes.count
     }
@@ -322,12 +337,8 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             cell.destinationAddress = routeTypes[currentRouteTitle]?.destinationAddress
             
             // Create the polyline to draw on the map for the route
-            let polyline = GMSPolyline(path: routeTypes[currentRouteTitle]!.path)
-            
-            polyline.strokeWidth = 5.0
-            polyline.geodesic = true
-            polyline.map = self.mapView
-            
+            drawOnMap(at: indexPath.item)
+        
             return cell
         }
     }
@@ -336,20 +347,42 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     // MARK: Create a graph method
     func createElevationGraph(elevationPoints: [Int]) {
         
-        graphDisplayView.backgroundFillColor = colorWithHexString(hex: "#333333")
+        graphDisplayView.backgroundFillColor = colorWithHexString(hex: "#F99275")
         
         graphDisplayView.rangeMax = 50
         
         graphDisplayView.lineWidth = 1
-        graphDisplayView.lineColor = colorWithHexString(hex: "#777777")
+        graphDisplayView.lineColor = colorWithHexString(hex: "#F99276")
         graphDisplayView.lineStyle = ScrollableGraphViewLineStyle.smooth
         
         graphDisplayView.shouldFill = true
         graphDisplayView.fillType = ScrollableGraphViewFillType.gradient
-        graphDisplayView.fillColor = colorWithHexString(hex: "#555555")
+        graphDisplayView.fillColor = colorWithHexString(hex: "#F99273")
         graphDisplayView.fillGradientType = ScrollableGraphViewGradientType.linear
-        graphDisplayView.fillGradientStartColor = colorWithHexString(hex: "#555555")
-        graphDisplayView.fillGradientEndColor = colorWithHexString(hex: "#444444")
+        graphDisplayView.fillGradientStartColor = colorWithHexString(hex: "#FFD6CA")
+        graphDisplayView.fillGradientEndColor = colorWithHexString(hex: "#FFA78E")
+        
+//        graphDisplayView.backgroundFillColor = colorWithHexString(hex: "#333333")
+        
+//        graphDisplayView.backgroundFillColor = colorWithHexString(hex: "#F99275")
+//        graphDisplayView.rangeMax = 50
+//        
+//        graphDisplayView.lineWidth = 1
+//        //        graphDisplayView.lineColor = colorWithHexString(hex: "#777777")
+//        graphDisplayView.lineColor = colorWithHexString(hex: "#00D9C5")
+//        graphDisplayView.lineStyle = ScrollableGraphViewLineStyle.smooth
+//        
+//        graphDisplayView.shouldFill = true
+//        graphDisplayView.fillType = ScrollableGraphViewFillType.gradient
+//        //        graphDisplayView.fillColor = colorWithHexString(hex: "#555555")
+//        graphDisplayView.fillColor = colorWithHexString(hex: "#0394A9")
+//        graphDisplayView.fillGradientType = ScrollableGraphViewGradientType.linear
+//        //        graphDisplayView.fillGradientStartColor = colorWithHexString(hex: "#555555")
+//        graphDisplayView.fillGradientStartColor = colorWithHexString(hex: "#0394A9")
+//        
+//        //        graphDisplayView.fillGradientEndColor = colorWithHexString(hex: "#444444")
+//        graphDisplayView.fillGradientEndColor = colorWithHexString(hex: "#7453BE")
+//        
         
         graphDisplayView.dataPointSpacing = 80
         graphDisplayView.dataPointSize = 2
