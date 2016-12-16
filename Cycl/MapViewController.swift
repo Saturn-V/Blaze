@@ -12,9 +12,10 @@ import MapKit
 import ScrollableGraphView
 
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UISearchBarDelegate {
     
     let googleAPIWrapper = GoogleAPIWrapper() // To access GoogleAPIWrapper methods
+    var searchBarTapped = false
     let locationManager = CLLocationManager()
     var currentloc: CLLocation? // Store users current location
     var selectedCell = 0
@@ -30,8 +31,9 @@ class MapViewController: UIViewController {
     
     
     
-    @IBOutlet weak var routeNameCollectionView: UICollectionView!
     
+    @IBOutlet weak var routeNameCollectionView: UICollectionView!
+    @IBOutlet weak var whereToButton: UIButton!
     @IBOutlet weak var routeDetailsCollectionView: UICollectionView!
     @IBOutlet weak var graphDisplayView: ScrollableGraphView!
     @IBOutlet weak var graphView: UIView!
@@ -42,16 +44,29 @@ class MapViewController: UIViewController {
         graphView.isHidden = true
         resetGraph()
     }
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        searchBarTapped = true
+        //setupSearchBarController()
+        //resultSearchController?.searchBar.isHidden = false
+        //resultSearchController?.isEditing = true
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         selectedCell = 0
         setupLocationManager()
-        setupSearchBarController()
         setupRouteCollectionViews()
         routeView.isHidden = true
         graphView.isHidden = true
+        
+        //set up UI for whereToTextField
+        whereToButton.layer.cornerRadius = 2
+        whereToButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        whereToButton.layer.shadowColor = UIColor.black.cgColor
+        whereToButton.layer.shadowRadius = 3
+        whereToButton.layer.shadowOpacity = 0.5
         
         resetGraph()
     }
@@ -95,43 +110,16 @@ extension MapViewController: CLLocationManagerDelegate {
             mapView = GMSMapView.map(withFrame: view.frame, camera: cam)
             mapView?.isMyLocationEnabled = true
             view.addSubview(mapView!)
+            view.bringSubview(toFront: whereToButton)
             
             // Stop getting Current Location once it has been found once
             locationManager.stopUpdatingLocation()
         }
     }
     
-    func setupSearchBarController() {
-        
-        // Instantiate Search Table Controller over Map View Controller with Storyboard ID
-        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! SearchTableViewController
-        
-        // Create a UISearchController with the Controller we defined above (locationSearchTable)
-        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-        
-        // Update the table view results live for 'locationSearchTable'
-        resultSearchController?.searchResultsUpdater = locationSearchTable
-        
-        // Setting up the search bar
-        let searchBar = resultSearchController!.searchBar
-        searchBar.sizeToFit()
-        searchBar.placeholder = "Search for places"
-        
-        // Set the navigation bar to be the SearchBar
-        navigationItem.titleView = searchBar
-        // Keep the search bar present when it is activated
-        resultSearchController?.hidesNavigationBarDuringPresentation = false
-        // Fancy shit to look pretty
-        resultSearchController?.dimsBackgroundDuringPresentation = true
-        definesPresentationContext = true
-        //      locationSearchTable.handleMapSearchDelegate = self
-    }
-    
     @IBAction func unwindToMapViewController(segue: UIStoryboardSegue) {
         
-        // for now, simply defining the method is sufficient.
-        // we'll add code later
-        
+        //simply defining the method is sufficient. bc it dismissed controllers to this controller with an exit segue
     }
 }
 
@@ -187,23 +175,18 @@ extension MapViewController {
             self.routeTypes["Least Elevation"] = fastestLeastElevationRoute
             self.routeTypes["Fastest"] = fastestRoute
             
-            
-            
-
             self.routeDetailsCollectionView.reloadData()
             self.routeNameCollectionView.reloadData()
             
             self.routeView.isHidden = false
             self.view.bringSubview(toFront: self.routeView)
             
-            
-            
-            
+            self.whereToButton.setTitle(self.destinationDetails!.name, for: .normal)
         })
     }
 }
+
 extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSource{
-    
     
     func setupRouteCollectionViews() {
         // Setup Delegate and Data Source for routeNameCollectionView
@@ -243,7 +226,6 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
                 routeNameCollectionView.contentOffset = CGPoint(x: routeDetailsCollectionView.contentOffset.x / CGFloat(2), y: 0)
             }
         }
-        
         findCenterIndex(scrollView)
     }
     
