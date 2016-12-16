@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Blaze-->
+        <!--BLAZE-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Cycl" customModuleProvider="target" sceneMemberID="viewController">
@@ -289,7 +289,7 @@
                             <constraint firstItem="1Hj-Al-pda" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="ncZ-7f-Cvf"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Blaze" id="11Y-MN-UGR"/>
+                    <navigationItem key="navigationItem" title="BLAZE" id="11Y-MN-UGR"/>
                     <connections>
                         <outlet property="graphDisplayView" destination="Kjt-UB-WX2" id="mje-By-dDt"/>
                         <outlet property="graphView" destination="1Hj-Al-pda" id="fLO-Xy-xb1"/>
@@ -447,6 +447,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bOE-rh-bCQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.98051065209999999" green="0.56804126499999996" blue="0.44395262000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
