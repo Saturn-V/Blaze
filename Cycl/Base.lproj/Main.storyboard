@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
+        <!--Blaze-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Cycl" customModuleProvider="target" sceneMemberID="viewController">
@@ -262,7 +262,7 @@
                             <constraint firstItem="Yql-mn-8Kg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fZR-dZ-WvG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="11Y-MN-UGR"/>
+                    <navigationItem key="navigationItem" title="Blaze" id="11Y-MN-UGR"/>
                     <connections>
                         <outlet property="graphDisplayView" destination="Kjt-UB-WX2" id="mje-By-dDt"/>
                         <outlet property="graphView" destination="1Hj-Al-pda" id="fLO-Xy-xb1"/>
