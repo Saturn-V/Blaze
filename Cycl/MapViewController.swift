@@ -227,8 +227,6 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         
         if routeDetailsCollectionView.isDragging {
-            var layout = UICollectionViewFlowLayout()
-            // let layoutPadding = routeNameCollectionView.frame.height
             routeNameCollectionView.contentOffset = CGPoint(x: routeDetailsCollectionView.contentOffset.x / CGFloat(2) - CGFloat(105), y: 0)
         }
         
@@ -335,7 +333,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             // Set properties in the cell to pass into the graphView
             cell.elevationPoints = routeTypes[currentRouteTitle]!.elevationPoints
             cell.destinationAddress = routeTypes[currentRouteTitle]?.destinationAddress
-            
+            cell.timeToDest.text = getTimeToDest(eta: "\(routeTypes[currentRouteTitle]!.eta/60)")
             // Create the polyline to draw on the map for the route
             drawOnMap(at: indexPath.item)
         
@@ -343,6 +341,22 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         }
     }
 
+    
+    //MARK: Helper functions
+    func getTimeToDest(eta: String) -> String {
+        
+        let currentDateTime = Date()
+        
+        // initialize the date formatter and set the style
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .none
+    
+        // get the date time String from the date object
+        let timeToDest = formatter.string(from: Calendar.current.date(byAdding: .minute, value: Int(eta)!, to: currentDateTime)!)
+        
+        return timeToDest
+    }
     
     // MARK: Create a graph method
     func createElevationGraph(elevationPoints: [Int]) {

@@ -13,6 +13,8 @@ class RouteDetailsCollectionViewCell: UICollectionViewCell {
     
     var mapViewController: MapViewController?
     
+    @IBOutlet weak var timeToDest: UILabel!
+    
     @IBOutlet weak var etaLabel: UILabel!
     
     @IBOutlet weak var totalElevationLabel: UILabel!
