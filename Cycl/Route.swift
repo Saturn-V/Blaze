@@ -32,5 +32,12 @@ class Route {
         return greatestElevation!
     }
     
+    func calc() {
+        // Average Miles Per Year / person
+        var mpy = 13356
+        // Average Fuel Efficiency / Vehicle in Miles Per Gallon
+        var veff = 23.6
+    }
+    
     
 }
