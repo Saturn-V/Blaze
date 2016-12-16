@@ -194,11 +194,18 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         routeNameCollectionView.dataSource = self
         routeNameCollectionView.showsHorizontalScrollIndicator = false
         
+        // Setup Delegate and Data Source for routeDetailsCollectionView
+        routeDetailsCollectionView.delegate = self
+        routeDetailsCollectionView.dataSource = self
+        routeDetailsCollectionView.isPagingEnabled = true
+        
+        routeDetailsCollectionView.frame = routeView.frame
+        
         // Setting up custom collectionViewLayout for routeDetailsCollectionView bc pretty
         let layout = UICollectionViewFlowLayout()
-        let layoutPadding = routeNameCollectionView.frame.height
+       // let layoutPadding = routeNameCollectionView.frame.height
         
-        layout.itemSize = CGSize(width: self.view.frame.width, height: routeDetailsCollectionView.frame.height - layoutPadding)
+        layout.itemSize = CGSize(width: self.view.frame.width, height: routeDetailsCollectionView.frame.height)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
@@ -207,10 +214,6 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         // Set collectionViewLayout to be the custom one we made above
         routeDetailsCollectionView!.collectionViewLayout = layout
         
-        // Setup Delegate and Data Source for routeDetailsCollectionView
-        routeDetailsCollectionView.delegate = self
-        routeDetailsCollectionView.dataSource = self
-        routeDetailsCollectionView.isPagingEnabled = true
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

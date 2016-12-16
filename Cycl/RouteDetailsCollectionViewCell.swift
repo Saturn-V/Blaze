@@ -14,13 +14,14 @@ class RouteDetailsCollectionViewCell: UICollectionViewCell {
     var mapViewController: MapViewController?
     
     @IBOutlet weak var etaLabel: UILabel!
+    
     @IBOutlet weak var totalElevationLabel: UILabel!
     var elevationPoints: [Int]!
     var destinationAddress: String!
     
     
+    
     @IBAction func navigateButtonPressed(_ sender: Any) {
-        
         let location = mapViewController?.destinationDetails?.location?.coordinate
         
         if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
@@ -33,7 +34,7 @@ class RouteDetailsCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBAction func GraphViewButtonPressed(_ sender: Any) {
+    @IBAction func graphViewButtonPressed(_ sender: Any) {
         mapViewController?.graphView.isHidden = false
         mapViewController?.createElevationGraph(elevationPoints: elevationPoints)
         mapViewController?.view.bringSubview(toFront: (mapViewController?.graphView)!)
