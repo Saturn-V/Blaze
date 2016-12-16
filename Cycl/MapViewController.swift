@@ -329,7 +329,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "routeDetailsCell", for: indexPath) as! RouteDetailsCollectionViewCell
             
             cell.mapViewController = self
-            cell.etaLabel.text = "\(routeTypes[currentRouteTitle]!.eta) min"
+            cell.etaLabel.text = "\(routeTypes[currentRouteTitle]!.eta/60) min"
             cell.totalElevationLabel.text = "\(routeTypes[currentRouteTitle]!.elevationTotal)ft of elevation"
             
             // Set properties in the cell to pass into the graphView

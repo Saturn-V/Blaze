@@ -96,7 +96,7 @@ class GoogleAPIWrapper {
                     let path = GMSPath(fromEncodedPath: pathString)
                     
                     // Store ETA of route in minutes
-                    let eta = routesJson[route]["legs"][0]["duration"]["value"].int!/60
+                    let eta = routesJson[route]["legs"][0]["duration"]["value"].int!
                     
                     // Construct URL for Google Elevation API
                     let elevation_api_url = self.makeElevationURL(path: path!.encodedPath(), samples: steps.count)
