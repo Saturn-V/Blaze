@@ -375,29 +375,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         graphDisplayView.fillGradientType = ScrollableGraphViewGradientType.linear
         graphDisplayView.fillGradientStartColor = colorWithHexString(hex: "#FFD6CA")
         graphDisplayView.fillGradientEndColor = colorWithHexString(hex: "#FFA78E")
-        
-//        graphDisplayView.backgroundFillColor = colorWithHexString(hex: "#333333")
-        
-//        graphDisplayView.backgroundFillColor = colorWithHexString(hex: "#F99275")
-//        graphDisplayView.rangeMax = 50
-//        
-//        graphDisplayView.lineWidth = 1
-//        //        graphDisplayView.lineColor = colorWithHexString(hex: "#777777")
-//        graphDisplayView.lineColor = colorWithHexString(hex: "#00D9C5")
-//        graphDisplayView.lineStyle = ScrollableGraphViewLineStyle.smooth
-//        
-//        graphDisplayView.shouldFill = true
-//        graphDisplayView.fillType = ScrollableGraphViewFillType.gradient
-//        //        graphDisplayView.fillColor = colorWithHexString(hex: "#555555")
-//        graphDisplayView.fillColor = colorWithHexString(hex: "#0394A9")
-//        graphDisplayView.fillGradientType = ScrollableGraphViewGradientType.linear
-//        //        graphDisplayView.fillGradientStartColor = colorWithHexString(hex: "#555555")
-//        graphDisplayView.fillGradientStartColor = colorWithHexString(hex: "#0394A9")
-//        
-//        //        graphDisplayView.fillGradientEndColor = colorWithHexString(hex: "#444444")
-//        graphDisplayView.fillGradientEndColor = colorWithHexString(hex: "#7453BE")
-//        
-        
+
         graphDisplayView.dataPointSpacing = 80
         graphDisplayView.dataPointSize = 2
         graphDisplayView.dataPointFillColor = UIColor.white
@@ -415,7 +393,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         // Set labels to number of points in elevation
         for index in 0..<elevationPoints.count {
             data.append(Double(elevationPoints[index]))
-            labels.append(String(index))
+            labels.append("\(index)ft")
         }
         
         graphDisplayView.set(data: data, withLabels: labels)
