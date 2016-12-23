@@ -18,6 +18,7 @@ class MapViewController: UIViewController, UISearchBarDelegate {
     var searchBarTapped = false
     let locationManager = CLLocationManager()
     var currentloc: CLLocation? // Store users current location
+    var endLoc: CLLocation? // Stores th eusers destination
     var selectedCell = 0
     var routeTypes : [String: Route] = [:]
     var resultSearchController: UISearchController? = nil
@@ -126,10 +127,11 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController {
     
     func pinZoom(destination: CLPlacemark) {
-        print("destination was chosen")
-        
+
         //clear existing pins
         self.mapView?.clear()
+        
+        endLoc = destination.location!
         
         let origin = CLLocationCoordinate2D(latitude: (currentloc?.coordinate.latitude)!, longitude: (currentloc?.coordinate.longitude)!)
         let bounds = GMSCoordinateBounds(coordinate: origin, coordinate: (destination.location?.coordinate)!)
@@ -137,11 +139,9 @@ extension MapViewController {
         
         mapView?.camera = camera!
         
-        let zoom = GMSCameraUpdate.fit(bounds, withPadding: 5)
+        let zoom = GMSCameraUpdate.fit(bounds, withPadding: 50)
         mapView?.animate(with: zoom)
         
-        let adjust = GMSCameraUpdate.fit(bounds)
-        mapView?.animate(with: adjust)
         
         googleAPIWrapper.getRouteData(origin: origin, destination: (destination.location?.coordinate)!, callback: { (routesArray) in
             
@@ -172,7 +172,7 @@ extension MapViewController {
             marker.position = (self.destinationDetails?.location?.coordinate)!
             marker.title = self.destinationDetails?.name
             marker.map = self.mapView
-
+            
             self.routeTypes["Least Elevation"] = fastestLeastElevationRoute
             self.routeTypes["Fastest"] = fastestRoute
             
@@ -282,13 +282,23 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         // If routeTypes array now contains the routes, display the map the collectionView index is currently on
         if routeTypes.count >= 1 {
             self.mapView?.clear()
+            
             let keys = Array(routeTypes.keys)
             let key = keys[indexPath]
             let polyline = GMSPolyline(path: routeTypes[key]!.path)
             polyline.strokeWidth = 5.0
             polyline.geodesic = true
             polyline.map = self.mapView
+    
+            let origin = CLLocationCoordinate2D(latitude: (currentloc?.coordinate.latitude)!, longitude: (currentloc?.coordinate.longitude)!)
+            let bounds = GMSCoordinateBounds(coordinate: origin, coordinate: (endLoc?.coordinate)!)
+            let camera = mapView?.camera(for: bounds, insets: UIEdgeInsets())!
             
+            mapView?.camera = camera!
+            
+            let zoom = GMSCameraUpdate.fit(bounds, withPadding: 50)
+            mapView?.animate(with: zoom)
+        
             // Creates a marker in the center of the map.
             let marker = GMSMarker()
             marker.position = (self.destinationDetails?.location?.coordinate)!
@@ -331,7 +341,9 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             cell.totalElevationLabel.text = "\(routeTypes[currentRouteTitle]!.elevationTotal)ft of elevation"
             
             // Set properties in the cell to pass into the graphView
-            cell.elevationPoints = routeTypes[currentRouteTitle]!.elevationPoints
+            cell.elevationResults = routeTypes[currentRouteTitle]!.elevationResults
+            //cell.elevationPoints = routeTypes[currentRouteTitle]!.elevationResults[indexPath.item]["elevationPoint"]
+            
             cell.destinationAddress = routeTypes[currentRouteTitle]?.destinationAddress
             cell.timeToDest.text = getTimeToDest(eta: "\(routeTypes[currentRouteTitle]!.eta/60)")
             // Create the polyline to draw on the map for the route
@@ -359,7 +371,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     // MARK: Create a graph method
-    func createElevationGraph(elevationPoints: [Int]) {
+    func createElevationGraph(elevationResults: [[String: Int]]) {
         
         graphDisplayView.backgroundFillColor = colorWithHexString(hex: "#F99275")
         
@@ -376,7 +388,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         graphDisplayView.fillGradientStartColor = colorWithHexString(hex: "#FFD6CA")
         graphDisplayView.fillGradientEndColor = colorWithHexString(hex: "#FFA78E")
 
-        graphDisplayView.dataPointSpacing = 80
+        graphDisplayView.dataPointSpacing = 50
         graphDisplayView.dataPointSize = 2
         graphDisplayView.dataPointFillColor = UIColor.white
         
@@ -391,9 +403,11 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         var labels = [String]()
         
         // Set labels to number of points in elevation
-        for index in 0..<elevationPoints.count {
-            data.append(Double(elevationPoints[index]))
-            labels.append("\(index)ft")
+        for index in 0..<elevationResults.count {
+            data.append(Double(elevationResults[index]["elevationPoint"]!))
+            
+            let metersToMiles = (Float(elevationResults[index]["elevationDistance"]!) * 0.000621371)
+            labels.append("\(String(format: "%.2f", metersToMiles)) mi")
         }
         
         graphDisplayView.set(data: data, withLabels: labels)

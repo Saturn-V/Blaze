@@ -18,7 +18,7 @@ class RouteDetailsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var etaLabel: UILabel!
     
     @IBOutlet weak var totalElevationLabel: UILabel!
-    var elevationPoints: [Int]!
+    var elevationResults: [[String: Int]]!
     var destinationAddress: String!
     
     
@@ -38,7 +38,7 @@ class RouteDetailsCollectionViewCell: UICollectionViewCell {
     
     @IBAction func graphViewButtonPressed(_ sender: Any) {
         mapViewController?.graphView.isHidden = false
-        mapViewController?.createElevationGraph(elevationPoints: elevationPoints)
+        mapViewController?.createElevationGraph(elevationResults: elevationResults)
         mapViewController?.view.bringSubview(toFront: (mapViewController?.graphView)!)
     }
 }

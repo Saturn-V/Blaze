@@ -11,20 +11,25 @@ import GoogleMaps
 
 class Route {
     var eta: Int
-    var elevationPoints: [Int]
+    var elevationResults: [[String: Int]]
     var elevationTotal: Int = 0
     var path: GMSPath?
     var destinationAddress: String?
     
-    init(path: GMSPath, eta: Int, elevationPoints: [Int], destinationAddress: String) {
+    init(path: GMSPath, eta: Int, elevationResults: [[String: Int]], destinationAddress: String) {
         self.path = path
         self.eta = eta
-        self.elevationPoints = elevationPoints
-        self.elevationTotal = getElevationTotal(elevationPoints: elevationPoints)
+        self.elevationResults = elevationResults
+        self.elevationTotal = getElevationTotal(elevationResults: elevationResults)
         self.destinationAddress = destinationAddress
     }
     
-    func getElevationTotal(elevationPoints: [Int]) -> Int {
+    func getElevationTotal(elevationResults: [[String: Int]]) -> Int {
+        var elevationPoints: [Int] = []
+        
+        for i in 0..<elevationResults.count {
+            elevationPoints.append(elevationResults[i]["elevationPoint"]!)
+        }
         
         let sortedElevation = elevationPoints.sorted()
         let greatestElevation = sortedElevation.last
