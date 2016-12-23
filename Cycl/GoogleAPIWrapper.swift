@@ -107,13 +107,32 @@ class GoogleAPIWrapper {
                             
                         // Store elevation points of route
                         var elevationPoints = [Int]()
-                        
+                        var elevationCoordinates = [CLLocationCoordinate2D]()
+                        var elevationCoordString = ""
+                        var elevationResults: [(Int, Int)] = []
                         // Loop through each Elevation Point in response | Append Elevation Point to 'elevationPoints'
                         // Convert Meters to Feet
                         for index in 0..<elevationData["results"].count {
                             let mToF = elevationData["results"][index]["elevation"].double! * 3.281
                             elevationPoints.append(Int(mToF))
+                            
+                            let lat = elevationData["results"][index]["location"]["lat"].float!
+                            let lng = elevationData["results"][0]["location"]["lng"].float!
+                            
+                            elevationCoordinates.append(CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(lng)))
+                            if index == 0 {
+                                
+                                elevationCoordString = "\(lat)%2C\(lng)"
+                                
+                            } else {
+                                
+                            elevationCoordString += "%7C\(lat)%2C\(lng)"
+                                
+                            }
+                            
                         }
+                        
+                        
                         
                         // Construct Route Object after getting all necessary data from API's
                         let completeRoute = Route(path: path!, eta: eta, elevationPoints: elevationPoints, destinationAddress: destination)
@@ -122,11 +141,22 @@ class GoogleAPIWrapper {
                         routesArray.append(completeRoute)
                         
                         i += 1
+                        print("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(origin.latitude),\(origin.longitude)&destinations=\(elevationCoordString)&key=AIzaSyCjvzJLw49aizKFP4IsV7ybReyYJrg03cg")
                         
+                        Alamofire.request("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(origin.latitude),\(origin.longitude)&destinations=\(elevationCoordString)&key=AIzaSyCjvzJLw49aizKFP4IsV7ybReyYJrg03cg").responseJSON(completionHandler: { (response) in
+                            
+                            if response.result.isSuccess {
+                                let json = JSON(value: response.result.value!)
+                                
+                                //for
                         if i == routesJson.count {
                             callback(routesArray)
                             print("Routes objects count: \(routesArray.count)")
                         }
+                            } else {
+                                print(response.result.error)
+                            }
+                })
                     })
                 }
             } else {
