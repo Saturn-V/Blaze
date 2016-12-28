@@ -12,3 +12,10 @@ enum RouteType {
     case fastest
     case leastElevation
 }
+
+enum Direction {
+    case right
+    case left
+    case north
+    case south
+}

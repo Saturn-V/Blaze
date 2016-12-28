@@ -16,43 +16,7 @@ import SwiftyJSON
 class GoogleAPIWrapper {
     
     var routes: [Route]?
-    
-    func calculateXRoute(for routeType: RouteType, routesArray: [Route]) -> Route {
-        
-        var routeIndex: Int?
-        var sortedRoutesArray: [Int] = []
-        
-        switch routeType {
-        case .fastest:
-            for index in 0..<routesArray.count {
-                sortedRoutesArray.append(routesArray[index].eta)
-            }
-            
-            sortedRoutesArray.sort()
-            let eta = sortedRoutesArray[0]
-            
-            for index in 0..<routesArray.count {
-                if eta == routesArray[index].eta {
-                    routeIndex = index
-                }
-            }
-        case .leastElevation:
-            for index in 0..<routesArray.count {
-                sortedRoutesArray.append(routesArray[index].elevationTotal)
-            }
-            sortedRoutesArray.sort()
-            
-            let elevationTotal = sortedRoutesArray[0]
-            
-            for index in 0..<routesArray.count {
-                if elevationTotal == routesArray[index].elevationTotal {
-                    routeIndex = index
-                }
-            }
-        }
-        return routesArray[routeIndex!]
-    }
-    
+
     
     //MARK: Google Maps and Directions API Calls
     
@@ -101,6 +65,8 @@ class GoogleAPIWrapper {
                     // Construct URL for Google Elevation API
                     let elevation_api_url = self.makeElevationURL(path: path!.encodedPath(), samples: steps.count)
                     
+                    var directions : [String] = []
+                    
                     // API Call to Google Elevation API
                     self.getElevationData(endpoint: elevation_api_url, callback: { (elevationData) in
                         // Closure for when we get the API response
@@ -114,6 +80,12 @@ class GoogleAPIWrapper {
                         // Loop through each Elevation Point in response | Append Elevation Point to 'elevationPoints'
                         // Convert Meters to Feet
                         for index in 0..<elevationData["results"].count {
+                            
+                            let htmlDirection = steps[index]["html_instructions"].string!
+                            let direction = htmlDirection.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+                            
+                            directions.append(direction)
+                            
                             let mToF = elevationData["results"][index]["elevation"].double! * 3.281
                             elevationPoints.append(Int(mToF))
                             
@@ -140,9 +112,9 @@ class GoogleAPIWrapper {
                                     let elevationDist = json["rows"][0]["elements"][distanceIndex]["distance"]["value"].int!
                                     elevationResults.append(["elevationPoint": elevationPoint, "elevationDistance": elevationDist])
                                 }
-                                
+                                print(directions)
                                 // Construct Route Object after getting all necessary data from API's
-                                let completeRoute = Route(path: path!, eta: eta, elevationResults: elevationResults, destinationAddress: destination)
+                                let completeRoute = Route(path: path!, eta: eta, elevationResults: elevationResults, destinationAddress: destination, directions: directions)
                                 
                                 // Append route to array of Route objects
                                 routesArray.append(completeRoute)
@@ -173,6 +145,43 @@ class GoogleAPIWrapper {
                 print("Error: \(response.result.error)")
             }
         }
+    }
+    
+    //Helper Function
+    func calculateXRoute(for routeType: RouteType, routesArray: [Route]) -> Route {
+        
+        var routeIndex: Int?
+        var sortedRoutesArray: [Int] = []
+        
+        switch routeType {
+        case .fastest:
+            for index in 0..<routesArray.count {
+                sortedRoutesArray.append(routesArray[index].eta)
+            }
+            
+            sortedRoutesArray.sort()
+            let eta = sortedRoutesArray[0]
+            
+            for index in 0..<routesArray.count {
+                if eta == routesArray[index].eta {
+                    routeIndex = index
+                }
+            }
+        case .leastElevation:
+            for index in 0..<routesArray.count {
+                sortedRoutesArray.append(routesArray[index].elevationTotal)
+            }
+            sortedRoutesArray.sort()
+            
+            let elevationTotal = sortedRoutesArray[0]
+            
+            for index in 0..<routesArray.count {
+                if elevationTotal == routesArray[index].elevationTotal {
+                    routeIndex = index
+                }
+            }
+        }
+        return routesArray[routeIndex!]
     }
     
     

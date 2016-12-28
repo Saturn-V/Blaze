@@ -29,18 +29,16 @@ class MapViewController: UIViewController, UISearchBarDelegate {
             pinZoom(destination: destinationDetails!)
         }
     }
-    
-    
-    
-    
+
     @IBOutlet weak var routeNameCollectionView: UICollectionView!
     @IBOutlet weak var whereToButton: UIButton!
     @IBOutlet weak var routeDetailsCollectionView: UICollectionView!
     @IBOutlet weak var graphDisplayView: ScrollableGraphView!
     @IBOutlet weak var graphView: UIView!
-    
     @IBOutlet weak var routeView: UIView!
     
+    
+    //IBAction Functions
     @IBAction func graphViewClose(_ sender: Any) {
         graphView.isHidden = true
         resetGraph()
@@ -118,6 +116,17 @@ extension MapViewController: CLLocationManagerDelegate {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goSegue"{
+            let destination = segue.destination as! DirectionViewController
+            
+            let keys = Array(routeTypes.keys)
+            let key = keys[selectedCell]
+            
+            destination.directions = (routeTypes[key]!.directions)
+        }
+    }
+        
     @IBAction func unwindToMapViewController(segue: UIStoryboardSegue) {
         
         //simply defining the method is sufficient. bc it dismissed controllers to this controller with an exit segue
@@ -394,8 +403,8 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         
         graphDisplayView.referenceLineLabelFont = UIFont.boldSystemFont(ofSize: 8)
         graphDisplayView.referenceLineColor = UIColor.white.withAlphaComponent(0.2)
-        graphDisplayView.referenceLineLabelColor = UIColor.white
-        graphDisplayView.dataPointLabelColor = UIColor.white.withAlphaComponent(0.5)
+        graphDisplayView.referenceLineLabelColor = UIColor.black
+        graphDisplayView.dataPointLabelColor = UIColor.black.withAlphaComponent(0.5)
         
         graphDisplayView.shouldAutomaticallyDetectRange = true
         

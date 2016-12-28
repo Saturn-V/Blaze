@@ -15,11 +15,13 @@ class Route {
     var elevationTotal: Int = 0
     var path: GMSPath?
     var destinationAddress: String?
+    var directions: [String]
     
-    init(path: GMSPath, eta: Int, elevationResults: [[String: Int]], destinationAddress: String) {
+    init(path: GMSPath, eta: Int, elevationResults: [[String: Int]], destinationAddress: String, directions: [String]) {
         self.path = path
         self.eta = eta
         self.elevationResults = elevationResults
+        self.directions = directions
         self.elevationTotal = getElevationTotal(elevationResults: elevationResults)
         self.destinationAddress = destinationAddress
     }
@@ -41,9 +43,9 @@ class Route {
     
     func calc() {
         // Average Miles Per Year / person
-        var mpy = 13356
+        let mpy = 13356
         // Average Fuel Efficiency / Vehicle in Miles Per Gallon
-        var veff = 23.6
+        let veff = 23.6
     }
     
     

@@ -24,8 +24,11 @@ class RouteDetailsCollectionViewCell: UICollectionViewCell {
     
     
     @IBAction func navigateButtonPressed(_ sender: Any) {
-        let location = mapViewController?.destinationDetails?.location?.coordinate
         
+        
+       /* SENDS USER TO GOOGLE MAPS
+         
+        let location = mapViewController?.destinationDetails?.location?.coordinate
         if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
             // UIApplication.shared.open(<#T##url: URL##URL#>, options: <#T##[String : Any]#>, completionHandler: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
             
@@ -33,8 +36,11 @@ class RouteDetailsCollectionViewCell: UICollectionViewCell {
                 "comgooglemaps://?saddr=&daddr=\(location!.latitude),\(location!.longitude)&directionsmode=biking&routeIndex=3")!)
         } else {
             NSLog("Can't use comgooglemaps://");
-        }
+            }
+       */
     }
+    
+    
     
     @IBAction func graphViewButtonPressed(_ sender: Any) {
         mapViewController?.graphView.isHidden = false
