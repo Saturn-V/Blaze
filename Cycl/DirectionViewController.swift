@@ -13,10 +13,13 @@ class DirectionViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var destinationLabel: UILabel!
-    var directions: [String] = []
     
+    var directions: [String] = []
+    var destination = "To "
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        destinationLabel.text = destination
         
         // Do any additional setup after loading the view.
     }
@@ -46,20 +49,19 @@ class DirectionViewController: UIViewController, UITableViewDelegate, UITableVie
             if direction.contains("Continue") {
                 cell.directionImageView.image = UIImage(named: "north")
             }
+            else if direction.contains("south") || direction.contains("U-turn") {
+                cell.directionImageView.image = UIImage(named: "south")
+            }
             else if direction.contains("right") {
                 cell.directionImageView.image = UIImage(named: "right")
             }
             else if direction.contains("left") {
                 cell.directionImageView.image = UIImage(named: "left")
             }
-            else if direction.contains("south") || direction.contains("U-turn") {
-                cell.directionImageView.image = UIImage(named: "south")
-            }
             else {
                 cell.directionImageView.image = UIImage(named: "north")
             }
         }
-        
         return cell
     }
 }

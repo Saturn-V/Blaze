@@ -18,11 +18,12 @@ class MapViewController: UIViewController, UISearchBarDelegate {
     var searchBarTapped = false
     let locationManager = CLLocationManager()
     var currentloc: CLLocation? // Store users current location
-    var endLoc: CLLocation? // Stores th eusers destination
+    var endLoc: CLLocation? // Stores th users destination
     var selectedCell = 0
     var routeTypes : [String: Route] = [:]
     var resultSearchController: UISearchController? = nil
     var mapView: GMSMapView?
+    var originDetails: CLPlacemark?
     var destinationDetails: CLPlacemark? {
         didSet {
             print(destinationDetails!)
@@ -37,7 +38,6 @@ class MapViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var graphView: UIView!
     @IBOutlet weak var routeView: UIView!
     
-    
     //IBAction Functions
     @IBAction func graphViewClose(_ sender: Any) {
         graphView.isHidden = true
@@ -50,7 +50,7 @@ class MapViewController: UIViewController, UISearchBarDelegate {
         //resultSearchController?.isEditing = true
     }
     
-    
+    //Life Cycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -116,13 +116,17 @@ extension MapViewController: CLLocationManagerDelegate {
         }
     }
     
+    
+    //MARK: Segue Functions
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goSegue"{
             let destination = segue.destination as! DirectionViewController
             
             let keys = Array(routeTypes.keys)
             let key = keys[selectedCell]
-            
+            let destinationStreet = destinationDetails?.addressDictionary?["Name"] as! String
+            destination.destination += destinationStreet
             destination.directions = (routeTypes[key]!.directions)
         }
     }
@@ -301,6 +305,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     
             let origin = CLLocationCoordinate2D(latitude: (currentloc?.coordinate.latitude)!, longitude: (currentloc?.coordinate.longitude)!)
             let bounds = GMSCoordinateBounds(coordinate: origin, coordinate: (endLoc?.coordinate)!)
+            
             let camera = mapView?.camera(for: bounds, insets: UIEdgeInsets())!
             
             mapView?.camera = camera!
@@ -384,7 +389,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         
         graphDisplayView.backgroundFillColor = colorWithHexString(hex: "#F99275")
         
-        graphDisplayView.rangeMax = 50
+        graphDisplayView.rangeMax = 60
         
         graphDisplayView.lineWidth = 1
         graphDisplayView.lineColor = colorWithHexString(hex: "#F99276")
@@ -397,7 +402,7 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         graphDisplayView.fillGradientStartColor = colorWithHexString(hex: "#FFD6CA")
         graphDisplayView.fillGradientEndColor = colorWithHexString(hex: "#FFA78E")
 
-        graphDisplayView.dataPointSpacing = 50
+        graphDisplayView.dataPointSpacing = 60
         graphDisplayView.dataPointSize = 2
         graphDisplayView.dataPointFillColor = UIColor.white
         

@@ -328,17 +328,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxc-nb-4oT">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="this s sample text to fill in the double sapcing that i need to fil" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxc-nb-4oT">
                                                     <rect key="frame" x="82" y="4" width="278" height="65"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="65" id="W4L-Ht-jJl"/>
                                                     </constraints>
-                                                    <string key="text">this s sample text to fill in the double sapcing that i need to fill in to see if it is good so if it is then i wont type anymore</string>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" red="0.1544654188" green="0.1544654188" blue="0.1544654188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right" translatesAutoresizingMaskIntoConstraints="NO" id="glN-Ny-G1r">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right" translatesAutoresizingMaskIntoConstraints="NO" id="glN-Ny-G1r">
                                                     <rect key="frame" x="22" y="15" width="40" height="43"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="BCp-k3-fKH"/>
@@ -553,7 +552,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sx0-qf-K8P" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bOE-rh-bCQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bOE-rh-bCQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.98051065209999999" green="0.56804126499999996" blue="0.44395262000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

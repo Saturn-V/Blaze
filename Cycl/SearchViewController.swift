@@ -23,6 +23,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var mapView: GMSMapView? = nil
     var searchBar = MKLocalSearchCompleter()
     var destinationDetails: CLPlacemark?
+    var originDetails: CLPlacemark?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +84,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if segue.identifier == "save" {
             let mapViewController = segue.destination as! MapViewController
             mapViewController.destinationDetails = destinationDetails
+            mapViewController.originDetails = originDetails
         }
     }
     
