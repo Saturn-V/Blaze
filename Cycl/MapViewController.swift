@@ -104,7 +104,6 @@ extension MapViewController: CLLocationManagerDelegate {
             
             // Create a GMSCameraPosition that tells the map to display the
             currentloc = location
-            
             let cam = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 16.5)
             mapView = GMSMapView.map(withFrame: view.frame, camera: cam)
             mapView?.isMyLocationEnabled = true

@@ -75,6 +75,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.destinationDetails = placemark
             self.performSegue(withIdentifier: "save", sender: self)
         }
+        
     }
     
     
