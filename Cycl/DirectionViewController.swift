@@ -21,6 +21,7 @@ class DirectionViewController: UIViewController, UITableViewDelegate, UITableVie
         
         destinationLabel.text = destination
         
+        tableView.separatorStyle = .none
         // Do any additional setup after loading the view.
     }
     
@@ -45,6 +46,7 @@ class DirectionViewController: UIViewController, UITableViewDelegate, UITableVie
             
             let direction = directions[indexPath.row]
             cell.directionDescriptionLabel.text = direction
+            cell.directionDescriptionLabel.textColor = .white
             
             if direction.contains("Continue") {
                 cell.directionImageView.image = UIImage(named: "north")
@@ -61,6 +63,12 @@ class DirectionViewController: UIViewController, UITableViewDelegate, UITableVie
             else {
                 cell.directionImageView.image = UIImage(named: "north")
             }
+        }
+        
+        if indexPath.item % 2 == 0 {
+            cell.backgroundColor = colorWithHexString(hex: "#F99273")
+        } else {
+            cell.backgroundColor = colorWithHexString(hex: "#FFA991")
         }
         return cell
     }

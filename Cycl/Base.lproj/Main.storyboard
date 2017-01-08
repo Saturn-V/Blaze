@@ -317,9 +317,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="74" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1WE-OM-2Zz">
-                                <rect key="frame" x="0.0" y="61" width="375" height="606"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="74" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1WE-OM-2Zz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="597"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.98628419639999998" green="0.713844955" blue="0.62292635439999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="74" id="owH-b0-9ol" customClass="DirectionTableViewCell" customModule="Cycl" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="74"/>
@@ -366,39 +367,51 @@
                                     <outlet property="delegate" destination="1aC-DY-V75" id="vFl-yx-4fM"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To 1650 Palisades Ave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPV-a8-aaE">
-                                <rect key="frame" x="16" y="20" width="279" height="33"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NWH-Mf-zG7">
+                                <rect key="frame" x="0.0" y="591" width="375" height="76"/>
+                                <color key="backgroundColor" red="1" green="0.51661938429999998" blue="0.35889995099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="AF3-nX-a72"/>
+                                    <constraint firstAttribute="height" constant="76" id="596-lF-F3f"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To 1650 Palisades Ave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPV-a8-aaE">
+                                <rect key="frame" x="16" y="614" width="279" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="XgH-PV-wOT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyI-ME-jgJ">
-                                <rect key="frame" x="303" y="20" width="62" height="33"/>
+                                <rect key="frame" x="303" y="614" width="62" height="33"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="62" id="ZW9-P1-h8y"/>
+                                    <constraint firstAttribute="height" constant="33" id="OEy-lb-MZZ"/>
+                                    <constraint firstAttribute="width" constant="62" id="pVm-G8-5F7"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
-                                <state key="normal" title="Done"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="bG9-6e-rMa" kind="unwind" unwindAction="unwindToMapViewControllerWithSegue:" id="b0E-Qb-laO"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.98628419639999998" green="0.713844955" blue="0.62292635439999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="1WE-OM-2Zz" firstAttribute="bottom" secondItem="R1b-A6-9qr" secondAttribute="top" id="1mL-d7-UYJ"/>
-                            <constraint firstItem="1WE-OM-2Zz" firstAttribute="leading" secondItem="DKS-sg-Ik7" secondAttribute="leading" id="4SE-1G-DSk"/>
-                            <constraint firstItem="1WE-OM-2Zz" firstAttribute="top" secondItem="oyI-ME-jgJ" secondAttribute="bottom" constant="8" symbolic="YES" id="65C-um-1pc"/>
-                            <constraint firstItem="PPV-a8-aaE" firstAttribute="top" secondItem="oyI-ME-jgJ" secondAttribute="top" id="7Ns-Va-CpB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="oyI-ME-jgJ" secondAttribute="trailing" constant="-6" id="HTQ-oT-RS9"/>
-                            <constraint firstItem="oyI-ME-jgJ" firstAttribute="leading" secondItem="PPV-a8-aaE" secondAttribute="trailing" constant="8" symbolic="YES" id="JBf-UQ-EYW"/>
-                            <constraint firstItem="PPV-a8-aaE" firstAttribute="leading" secondItem="DKS-sg-Ik7" secondAttribute="leadingMargin" id="ZHr-yy-A3u"/>
-                            <constraint firstItem="PPV-a8-aaE" firstAttribute="top" secondItem="n4n-Hs-LUl" secondAttribute="bottom" id="fUi-fx-zwC"/>
-                            <constraint firstItem="1WE-OM-2Zz" firstAttribute="top" secondItem="PPV-a8-aaE" secondAttribute="bottom" constant="8" symbolic="YES" id="rMx-Yu-zvw"/>
-                            <constraint firstAttribute="trailing" secondItem="1WE-OM-2Zz" secondAttribute="trailing" id="z5c-vS-bJe"/>
+                            <constraint firstItem="1WE-OM-2Zz" firstAttribute="top" secondItem="n4n-Hs-LUl" secondAttribute="bottom" constant="-20" id="2A8-Gp-pHI"/>
+                            <constraint firstItem="oyI-ME-jgJ" firstAttribute="top" secondItem="1WE-OM-2Zz" secondAttribute="bottom" constant="17" id="Krk-gU-y8G"/>
+                            <constraint firstItem="1WE-OM-2Zz" firstAttribute="leading" secondItem="DKS-sg-Ik7" secondAttribute="leading" id="QIF-B2-KMo"/>
+                            <constraint firstItem="NWH-Mf-zG7" firstAttribute="leading" secondItem="DKS-sg-Ik7" secondAttribute="leading" id="Vdr-Fz-MwW"/>
+                            <constraint firstAttribute="trailing" secondItem="NWH-Mf-zG7" secondAttribute="trailing" id="XTN-VI-e61"/>
+                            <constraint firstItem="oyI-ME-jgJ" firstAttribute="leading" secondItem="PPV-a8-aaE" secondAttribute="trailing" constant="8" id="bRt-aT-NAM"/>
+                            <constraint firstItem="R1b-A6-9qr" firstAttribute="top" secondItem="oyI-ME-jgJ" secondAttribute="bottom" constant="20" id="e7p-fh-X4n"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="PPV-a8-aaE" secondAttribute="leading" id="pAX-OQ-DAG"/>
+                            <constraint firstItem="R1b-A6-9qr" firstAttribute="top" secondItem="NWH-Mf-zG7" secondAttribute="bottom" id="rYK-s9-2IL"/>
+                            <constraint firstAttribute="trailing" secondItem="1WE-OM-2Zz" secondAttribute="trailing" id="tkJ-SQ-KRA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oyI-ME-jgJ" secondAttribute="trailing" constant="-6" id="xdS-WB-eiw"/>
+                            <constraint firstItem="R1b-A6-9qr" firstAttribute="top" secondItem="PPV-a8-aaE" secondAttribute="bottom" constant="20" id="yBO-rD-9Td"/>
                         </constraints>
                     </view>
                     <connections>
@@ -552,7 +565,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sx0-qf-K8P" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bOE-rh-bCQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bOE-rh-bCQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.98051065209999999" green="0.56804126499999996" blue="0.44395262000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

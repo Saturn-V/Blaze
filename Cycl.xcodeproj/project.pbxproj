@@ -115,7 +115,6 @@
 			children = (
 				B43DBF451DEE356F0069430F /* MapViewController.swift */,
 				E66958F71E03BD35001861A2 /* SearchViewController.swift */,
-				E60CFA7E1E1301690087F1B3 /* DirectionViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -125,6 +124,7 @@
 			children = (
 				B4E9319C1DFC96EE0030F906 /* Route.swift */,
 				B4AE9F3F1DFE1C2C00EB089C /* RouteType.swift */,
+				E60CFA7E1E1301690087F1B3 /* DirectionViewController.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -199,7 +199,7 @@
 				TargetAttributes = {
 					B43DBF3F1DEE356F0069430F = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = CWG8663V7A;
+						DevelopmentTeam = 7QQX7GNST9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -428,7 +428,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CWG8663V7A;
+				DEVELOPMENT_TEAM = 7QQX7GNST9;
 				INFOPLIST_FILE = Cycl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Cycl;
@@ -443,7 +443,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CWG8663V7A;
+				DEVELOPMENT_TEAM = 7QQX7GNST9;
 				INFOPLIST_FILE = Cycl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Cycl;
