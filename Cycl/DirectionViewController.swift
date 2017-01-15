@@ -39,6 +39,12 @@ class DirectionViewController: UIViewController, UITableViewDelegate, UITableVie
         return directions.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.item == 0 {
+            return 100
+        }
+        return 70
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! DirectionTableViewCell
         
@@ -64,7 +70,7 @@ class DirectionViewController: UIViewController, UITableViewDelegate, UITableVie
                 cell.directionImageView.image = UIImage(named: "north")
             }
         }
-        
+    
         if indexPath.item % 2 == 0 {
             cell.backgroundColor = colorWithHexString(hex: "#F99273")
         } else {

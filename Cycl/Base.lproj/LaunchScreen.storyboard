@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,12 +20,50 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="hBi-de-ovV">
+                                <rect key="frame" x="0.0" y="431" width="375" height="236"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="236" id="KGt-eu-VTV"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="krl-Qw-TVz">
+                                <rect key="frame" x="-12" y="269" width="387" height="161"/>
+                                <color key="backgroundColor" red="0.97646421194076538" green="0.57186287641525269" blue="0.4608948826789856" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="161" id="mcZ-vZ-C3M"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLAZE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="19" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YaV-l9-WoE">
+                                <rect key="frame" x="0.0" y="261.5" width="375" height="104"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="104" id="Cjt-M5-IU9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="39"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97646421194076538" green="0.57186287641525269" blue="0.4608948826789856" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hBi-de-ovV" secondAttribute="trailing" id="90e-z0-zZD"/>
+                            <constraint firstItem="YaV-l9-WoE" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="CQW-CE-b7b"/>
+                            <constraint firstItem="hBi-de-ovV" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="EXE-41-0Gu"/>
+                            <constraint firstAttribute="trailing" secondItem="krl-Qw-TVz" secondAttribute="trailing" id="K3v-kO-GNa"/>
+                            <constraint firstItem="YaV-l9-WoE" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-20" id="KU0-wD-Rme"/>
+                            <constraint firstAttribute="trailing" secondItem="YaV-l9-WoE" secondAttribute="trailing" id="S7i-ME-1D8"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="hBi-de-ovV" secondAttribute="bottom" id="dWe-VH-L6m"/>
+                            <constraint firstItem="hBi-de-ovV" firstAttribute="top" secondItem="krl-Qw-TVz" secondAttribute="bottom" constant="1" id="fkM-zm-i7f"/>
+                            <constraint firstItem="krl-Qw-TVz" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-12" id="xJq-y3-95s"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="96.799999999999997" y="248.72563718140933"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="iTunesArtwork" width="512" height="512"/>
+    </resources>
 </document>

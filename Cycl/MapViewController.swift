@@ -151,8 +151,8 @@ extension MapViewController {
         
         mapView?.camera = camera!
         
-        let zoom = GMSCameraUpdate.fit(bounds, withPadding: 50)
-        mapView?.animate(with: zoom)
+//        let zoom = GMSCameraUpdate.fit(bounds, withPadding: 50)
+//        mapView?.animate(with: zoom)
         
         
         googleAPIWrapper.getRouteData(origin: origin, destination: (destination.location?.coordinate)!, callback: { (routesArray) in
@@ -275,6 +275,8 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             let cell = routeNameCollectionView.cellForItem(at: index!) as? RouteNameCollectionViewCell
             if (cell != nil) {
                 selectedCell = (routeNameCollectionView.indexPath(for: cell!)?.item)!
+           
+                drawOnMap(at: selectedCell)
             }
         } else if (cell != nil) {
             let actualPosition = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
@@ -283,11 +285,11 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
                 
                 if (currentCell == cell! && (selectedCell == 0 || selectedCell == 1) && actualPosition.x > 0) {
                     selectedCell = (routeNameCollectionView.indexPath(for: cell!)?.item)!
+                    
+                        drawOnMap(at: selectedCell)
                 }
             }
         }
-
-        drawOnMap(at: selectedCell)
     }
     
     func drawOnMap(at indexPath: Int) {
@@ -301,17 +303,17 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             polyline.strokeWidth = 5.0
             polyline.geodesic = true
             polyline.map = self.mapView
-    
+        
+            
             let origin = CLLocationCoordinate2D(latitude: (currentloc?.coordinate.latitude)!, longitude: (currentloc?.coordinate.longitude)!)
             let bounds = GMSCoordinateBounds(coordinate: origin, coordinate: (endLoc?.coordinate)!)
             
             let camera = mapView?.camera(for: bounds, insets: UIEdgeInsets())!
             
             mapView?.camera = camera!
+            let update = GMSCameraUpdate.fit(bounds, withPadding: 60.0)
+            mapView?.moveCamera(update)
             
-            let zoom = GMSCameraUpdate.fit(bounds, withPadding: 50)
-            mapView?.animate(with: zoom)
-        
             // Creates a marker in the center of the map.
             let marker = GMSMarker()
             marker.position = (self.destinationDetails?.location?.coordinate)!
@@ -360,8 +362,10 @@ extension MapViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             cell.destinationAddress = routeTypes[currentRouteTitle]?.destinationAddress
             cell.timeToDest.text = getTimeToDest(eta: "\(routeTypes[currentRouteTitle]!.eta/60)")
             // Create the polyline to draw on the map for the route
+            
+            if indexPath.item == 0 {
             drawOnMap(at: indexPath.item)
-        
+            }
             return cell
         }
     }

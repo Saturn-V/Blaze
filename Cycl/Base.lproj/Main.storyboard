@@ -368,13 +368,13 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NWH-Mf-zG7">
-                                <rect key="frame" x="0.0" y="591" width="375" height="76"/>
+                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
                                 <color key="backgroundColor" red="1" green="0.51661938429999998" blue="0.35889995099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="76" id="596-lF-F3f"/>
+                                    <constraint firstAttribute="height" constant="80" id="596-lF-F3f"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To 1650 Palisades Ave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPV-a8-aaE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="To 1650 Palisades Ave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPV-a8-aaE">
                                 <rect key="frame" x="16" y="614" width="279" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="XgH-PV-wOT"/>
@@ -401,6 +401,7 @@
                         <color key="backgroundColor" red="0.98628419639999998" green="0.713844955" blue="0.62292635439999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1WE-OM-2Zz" firstAttribute="top" secondItem="n4n-Hs-LUl" secondAttribute="bottom" constant="-20" id="2A8-Gp-pHI"/>
+                            <constraint firstItem="PPV-a8-aaE" firstAttribute="centerY" secondItem="DKS-sg-Ik7" secondAttribute="centerY" id="K8O-S5-9dE"/>
                             <constraint firstItem="oyI-ME-jgJ" firstAttribute="top" secondItem="1WE-OM-2Zz" secondAttribute="bottom" constant="17" id="Krk-gU-y8G"/>
                             <constraint firstItem="1WE-OM-2Zz" firstAttribute="leading" secondItem="DKS-sg-Ik7" secondAttribute="leading" id="QIF-B2-KMo"/>
                             <constraint firstItem="NWH-Mf-zG7" firstAttribute="leading" secondItem="DKS-sg-Ik7" secondAttribute="leading" id="Vdr-Fz-MwW"/>
@@ -411,7 +412,6 @@
                             <constraint firstItem="R1b-A6-9qr" firstAttribute="top" secondItem="NWH-Mf-zG7" secondAttribute="bottom" id="rYK-s9-2IL"/>
                             <constraint firstAttribute="trailing" secondItem="1WE-OM-2Zz" secondAttribute="trailing" id="tkJ-SQ-KRA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oyI-ME-jgJ" secondAttribute="trailing" constant="-6" id="xdS-WB-eiw"/>
-                            <constraint firstItem="R1b-A6-9qr" firstAttribute="top" secondItem="PPV-a8-aaE" secondAttribute="bottom" constant="20" id="yBO-rD-9Td"/>
                         </constraints>
                     </view>
                     <connections>
@@ -472,7 +472,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAq-OE-sHj">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="139"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="  Current Location" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z7F-oJ-Evx">
+                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="  Current Location" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z7F-oJ-Evx">
                                         <rect key="frame" x="53" y="51" width="300" height="30"/>
                                         <color key="backgroundColor" red="0.98628419637680054" green="0.71384495496749878" blue="0.62292635440826416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="0.20917409658432007" green="0.5866430401802063" blue="0.99351614713668823" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -565,7 +565,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sx0-qf-K8P" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bOE-rh-bCQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bOE-rh-bCQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.98051065209999999" green="0.56804126499999996" blue="0.44395262000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
