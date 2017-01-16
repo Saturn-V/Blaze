@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import GoogleMaps
+import Alamofire
+import SwiftyJSON
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, MKLocalSearchCompleterDelegate {
 
@@ -106,6 +108,22 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 placemark = nil
             }
         }
+    
+    }
+    func checkIfUserHasInternetConnection() -> Bool {
+        var connection: Bool = false
+        Alamofire.request("https://clients4.google.com/glm/mmap").responseJSON { (response) in
+            if response.result.isSuccess {
+                print("you have internet")
+                connection = true
+            }
+            else {
+                print(response.result.error!)
+                print("you do not have internet connection")
+                connection = false
+            }
+        }
+        return connection
     }
 }
 
@@ -124,7 +142,18 @@ extension SearchViewController: UITextFieldDelegate {
         
         searchBar.queryFragment = searchBarText
         
+        let internetAccess = checkIfUserHasInternetConnection()
+        
+        if internetAccess == false {
+            let alertController = UIAlertController(title: "Sorry Fellow Biker!", message: "You have no network connection", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            
+            alertController.addAction(cancel)
+            self.present(alertController, animated: true, completion: nil)
+        }
         self.results = self.searchBar.results
+        print("results: \(searchBar.results)")
+        print("queryFragment \(searchBar.queryFragment)")
         
         searchResultsTableView.reloadData()
         return true

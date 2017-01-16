@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="hBi-de-ovV">
-                                <rect key="frame" x="0.0" y="431" width="375" height="236"/>
+                                <rect key="frame" x="-9" y="431" width="392" height="236"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="236" id="KGt-eu-VTV"/>
                                 </constraints>
@@ -34,21 +34,21 @@
                                     <constraint firstAttribute="height" constant="161" id="mcZ-vZ-C3M"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLAZE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="19" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YaV-l9-WoE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="19" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YaV-l9-WoE">
                                 <rect key="frame" x="0.0" y="261.5" width="375" height="104"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="104" id="Cjt-M5-IU9"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="39"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="39"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97646421194076538" green="0.57186287641525269" blue="0.4608948826789856" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="hBi-de-ovV" secondAttribute="trailing" id="90e-z0-zZD"/>
+                            <constraint firstAttribute="trailing" secondItem="hBi-de-ovV" secondAttribute="trailing" constant="-8" id="90e-z0-zZD"/>
                             <constraint firstItem="YaV-l9-WoE" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="CQW-CE-b7b"/>
-                            <constraint firstItem="hBi-de-ovV" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="EXE-41-0Gu"/>
+                            <constraint firstItem="hBi-de-ovV" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-9" id="EXE-41-0Gu"/>
                             <constraint firstAttribute="trailing" secondItem="krl-Qw-TVz" secondAttribute="trailing" id="K3v-kO-GNa"/>
                             <constraint firstItem="YaV-l9-WoE" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-20" id="KU0-wD-Rme"/>
                             <constraint firstAttribute="trailing" secondItem="YaV-l9-WoE" secondAttribute="trailing" id="S7i-ME-1D8"/>

@@ -13,7 +13,7 @@
         <!--BLAZE-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Cycl" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Blaze" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -84,7 +84,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="routeDetailsCell" id="3I6-W0-y7u" customClass="RouteDetailsCollectionViewCell" customModule="Cycl" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="routeDetailsCell" id="3I6-W0-y7u" customClass="RouteDetailsCollectionViewCell" customModule="Blaze" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="296"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -212,14 +212,14 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="51" id="6dm-mI-L6q"/>
                                         </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rHO-LA-5ij" customClass="LGHorizontalLinearFlowLayout" customModule="Cycl" customModuleProvider="target">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rHO-LA-5ij" customClass="LGHorizontalLinearFlowLayout" customModule="Blaze" customModuleProvider="target">
                                             <size key="itemSize" width="173" height="69"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="routeNameCell" id="Qi3-RG-QNu" customClass="RouteNameCollectionViewCell" customModule="Cycl" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="routeNameCell" id="Qi3-RG-QNu" customClass="RouteNameCollectionViewCell" customModule="Blaze" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="-9" width="173" height="69"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -308,7 +308,7 @@
         <!--Direction View Controller-->
         <scene sceneID="IDm-7r-qOz">
             <objects>
-                <viewController id="1aC-DY-V75" customClass="DirectionViewController" customModule="Cycl" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1aC-DY-V75" customClass="DirectionViewController" customModule="Blaze" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n4n-Hs-LUl"/>
                         <viewControllerLayoutGuide type="bottom" id="R1b-A6-9qr"/>
@@ -322,7 +322,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.98628419639999998" green="0.713844955" blue="0.62292635439999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="74" id="owH-b0-9ol" customClass="DirectionTableViewCell" customModule="Cycl" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="74" id="owH-b0-9ol" customClass="DirectionTableViewCell" customModule="Blaze" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="owH-b0-9ol" id="C1k-Mm-1aC">
@@ -374,7 +374,7 @@
                                     <constraint firstAttribute="height" constant="80" id="596-lF-F3f"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="To 1650 Palisades Ave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPV-a8-aaE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To 1650 Palisades Ave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPV-a8-aaE">
                                 <rect key="frame" x="16" y="614" width="279" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="XgH-PV-wOT"/>
@@ -401,7 +401,7 @@
                         <color key="backgroundColor" red="0.98628419639999998" green="0.713844955" blue="0.62292635439999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1WE-OM-2Zz" firstAttribute="top" secondItem="n4n-Hs-LUl" secondAttribute="bottom" constant="-20" id="2A8-Gp-pHI"/>
-                            <constraint firstItem="PPV-a8-aaE" firstAttribute="centerY" secondItem="DKS-sg-Ik7" secondAttribute="centerY" id="K8O-S5-9dE"/>
+                            <constraint firstItem="PPV-a8-aaE" firstAttribute="centerY" secondItem="DKS-sg-Ik7" secondAttribute="centerY" constant="297" id="K8O-S5-9dE"/>
                             <constraint firstItem="oyI-ME-jgJ" firstAttribute="top" secondItem="1WE-OM-2Zz" secondAttribute="bottom" constant="17" id="Krk-gU-y8G"/>
                             <constraint firstItem="1WE-OM-2Zz" firstAttribute="leading" secondItem="DKS-sg-Ik7" secondAttribute="leading" id="QIF-B2-KMo"/>
                             <constraint firstItem="NWH-Mf-zG7" firstAttribute="leading" secondItem="DKS-sg-Ik7" secondAttribute="leading" id="Vdr-Fz-MwW"/>
@@ -427,7 +427,7 @@
         <!--Search View Controller-->
         <scene sceneID="jpq-sS-iiX">
             <objects>
-                <viewController id="hdT-NT-OSi" customClass="SearchViewController" customModule="Cycl" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hdT-NT-OSi" customClass="SearchViewController" customModule="Blaze" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mko-2W-ODI"/>
                         <viewControllerLayoutGuide type="bottom" id="d1U-w9-RQF"/>
@@ -565,7 +565,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sx0-qf-K8P" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bOE-rh-bCQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bOE-rh-bCQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.98051065209999999" green="0.56804126499999996" blue="0.44395262000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
