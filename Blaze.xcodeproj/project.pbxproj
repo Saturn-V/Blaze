@@ -22,6 +22,7 @@
 		E6084C7C1E00779A00C07E10 /* LGHorizontalLinearFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6084C7B1E00779A00C07E10 /* LGHorizontalLinearFlowLayout.swift */; };
 		E6084C7E1E0077A000C07E10 /* RouteDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6084C7D1E0077A000C07E10 /* RouteDetailsCollectionViewCell.swift */; };
 		E6084C801E0077A700C07E10 /* RouteNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6084C7F1E0077A700C07E10 /* RouteNameCollectionViewCell.swift */; };
+		E60A24FC1E2E9E9800F4573B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60A24FB1E2E9E9800F4573B /* Reachability.swift */; };
 		E60CFA7F1E1301690087F1B3 /* DirectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60CFA7E1E1301690087F1B3 /* DirectionViewController.swift */; };
 		E60CFA811E13017D0087F1B3 /* DirectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60CFA801E13017D0087F1B3 /* DirectionTableViewCell.swift */; };
 		E66958F81E03BD35001861A2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66958F71E03BD35001861A2 /* SearchViewController.swift */; };
@@ -47,6 +48,7 @@
 		E6084C7B1E00779A00C07E10 /* LGHorizontalLinearFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGHorizontalLinearFlowLayout.swift; sourceTree = "<group>"; };
 		E6084C7D1E0077A000C07E10 /* RouteDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		E6084C7F1E0077A700C07E10 /* RouteNameCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteNameCollectionViewCell.swift; sourceTree = "<group>"; };
+		E60A24FB1E2E9E9800F4573B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		E60CFA7E1E1301690087F1B3 /* DirectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionViewController.swift; sourceTree = "<group>"; };
 		E60CFA801E13017D0087F1B3 /* DirectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionTableViewCell.swift; sourceTree = "<group>"; };
 		E66958F71E03BD35001861A2 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				B43DBF451DEE356F0069430F /* MapViewController.swift */,
 				E66958F71E03BD35001861A2 /* SearchViewController.swift */,
+				E60CFA7E1E1301690087F1B3 /* DirectionViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -124,7 +127,6 @@
 			children = (
 				B4E9319C1DFC96EE0030F906 /* Route.swift */,
 				B4AE9F3F1DFE1C2C00EB089C /* RouteType.swift */,
-				E60CFA7E1E1301690087F1B3 /* DirectionViewController.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				B43DBF741DF791D00069430F /* GoogleAPIWrapper.swift */,
+				E60A24FB1E2E9E9800F4573B /* Reachability.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E60A24FC1E2E9E9800F4573B /* Reachability.swift in Sources */,
 				E6084C7E1E0077A000C07E10 /* RouteDetailsCollectionViewCell.swift in Sources */,
 				B43DBF6B1DF293710069430F /* MapViewControllerDelegate.swift in Sources */,
 				E6084C7C1E00779A00C07E10 /* LGHorizontalLinearFlowLayout.swift in Sources */,
@@ -428,11 +432,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				DEVELOPMENT_TEAM = 7QQX7GNST9;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Cycl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.miriamhendler.blaze;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -443,11 +451,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				DEVELOPMENT_TEAM = 7QQX7GNST9;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Cycl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.miriamhendler.blaze;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

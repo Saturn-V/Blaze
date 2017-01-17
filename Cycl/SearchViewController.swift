@@ -108,22 +108,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 placemark = nil
             }
         }
-    
-    }
-    func checkIfUserHasInternetConnection() -> Bool {
-        var connection: Bool = false
-        Alamofire.request("https://clients4.google.com/glm/mmap").responseJSON { (response) in
-            if response.result.isSuccess {
-                print("you have internet")
-                connection = true
-            }
-            else {
-                print(response.result.error!)
-                print("you do not have internet connection")
-                connection = false
-            }
-        }
-        return connection
     }
 }
 
@@ -142,7 +126,16 @@ extension SearchViewController: UITextFieldDelegate {
         
         searchBar.queryFragment = searchBarText
         
-        let internetAccess = checkIfUserHasInternetConnection()
+        var internetAccess = false
+        if Reachability.isConnectedToNetwork() == true
+        {
+            print("Internet Connection Available!")
+            internetAccess = true
+        }
+        else
+        {
+            print("Internet Connection not Available!")
+        }
         
         if internetAccess == false {
             let alertController = UIAlertController(title: "Sorry Fellow Biker!", message: "You have no network connection", preferredStyle: .alert)

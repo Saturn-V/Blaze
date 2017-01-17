@@ -71,7 +71,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yql-mn-8Kg">
                                 <rect key="frame" x="0.0" y="373" width="375" height="294"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yJP-vR-zdl">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yJP-vR-zdl">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="294"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -318,7 +318,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="74" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1WE-OM-2Zz">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="597"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="577"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.98628419639999998" green="0.713844955" blue="0.62292635439999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -377,7 +377,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To 1650 Palisades Ave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPV-a8-aaE">
                                 <rect key="frame" x="16" y="614" width="279" height="33"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="XgH-PV-wOT"/>
+                                    <constraint firstAttribute="height" constant="33" id="eF7-sm-dn6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -400,21 +400,22 @@
                         </subviews>
                         <color key="backgroundColor" red="0.98628419639999998" green="0.713844955" blue="0.62292635439999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="1WE-OM-2Zz" firstAttribute="top" secondItem="n4n-Hs-LUl" secondAttribute="bottom" constant="-20" id="2A8-Gp-pHI"/>
-                            <constraint firstItem="PPV-a8-aaE" firstAttribute="centerY" secondItem="DKS-sg-Ik7" secondAttribute="centerY" constant="297" id="K8O-S5-9dE"/>
+                            <constraint firstItem="1WE-OM-2Zz" firstAttribute="top" secondItem="n4n-Hs-LUl" secondAttribute="bottom" id="2A8-Gp-pHI"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="PPV-a8-aaE" secondAttribute="leading" id="9fm-aG-7ct"/>
                             <constraint firstItem="oyI-ME-jgJ" firstAttribute="top" secondItem="1WE-OM-2Zz" secondAttribute="bottom" constant="17" id="Krk-gU-y8G"/>
                             <constraint firstItem="1WE-OM-2Zz" firstAttribute="leading" secondItem="DKS-sg-Ik7" secondAttribute="leading" id="QIF-B2-KMo"/>
                             <constraint firstItem="NWH-Mf-zG7" firstAttribute="leading" secondItem="DKS-sg-Ik7" secondAttribute="leading" id="Vdr-Fz-MwW"/>
                             <constraint firstAttribute="trailing" secondItem="NWH-Mf-zG7" secondAttribute="trailing" id="XTN-VI-e61"/>
-                            <constraint firstItem="oyI-ME-jgJ" firstAttribute="leading" secondItem="PPV-a8-aaE" secondAttribute="trailing" constant="8" id="bRt-aT-NAM"/>
+                            <constraint firstItem="PPV-a8-aaE" firstAttribute="centerY" secondItem="oyI-ME-jgJ" secondAttribute="centerY" id="cAP-bm-xgQ"/>
                             <constraint firstItem="R1b-A6-9qr" firstAttribute="top" secondItem="oyI-ME-jgJ" secondAttribute="bottom" constant="20" id="e7p-fh-X4n"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="PPV-a8-aaE" secondAttribute="leading" id="pAX-OQ-DAG"/>
+                            <constraint firstItem="oyI-ME-jgJ" firstAttribute="leading" secondItem="PPV-a8-aaE" secondAttribute="trailing" constant="8" id="qQr-fL-atz"/>
                             <constraint firstItem="R1b-A6-9qr" firstAttribute="top" secondItem="NWH-Mf-zG7" secondAttribute="bottom" id="rYK-s9-2IL"/>
                             <constraint firstAttribute="trailing" secondItem="1WE-OM-2Zz" secondAttribute="trailing" id="tkJ-SQ-KRA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oyI-ME-jgJ" secondAttribute="trailing" constant="-6" id="xdS-WB-eiw"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="destinationDetailView" destination="NWH-Mf-zG7" id="uWJ-ch-tfm"/>
                         <outlet property="destinationLabel" destination="PPV-a8-aaE" id="8Lo-rn-elE"/>
                         <outlet property="tableView" destination="1WE-OM-2Zz" id="jP4-4n-E4s"/>
                     </connections>

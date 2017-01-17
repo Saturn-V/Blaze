@@ -10,6 +10,7 @@ import UIKit
 
 class DirectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var destinationDetailView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var destinationLabel: UILabel!
@@ -21,8 +22,13 @@ class DirectionViewController: UIViewController, UITableViewDelegate, UITableVie
         
         destinationLabel.text = destination
         
+        //Setting *goalsTableView* background to transparent
+        tableView.backgroundColor = UIColor(patternImage: UIImage(named: "transparent")!)
         tableView.separatorStyle = .none
         // Do any additional setup after loading the view.
+        
+        //Setup destination detail view
+        addShadowFor(yourView: destinationDetailView)
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,12 +45,6 @@ class DirectionViewController: UIViewController, UITableViewDelegate, UITableVie
         return directions.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.item == 0 {
-            return 100
-        }
-        return 70
-    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! DirectionTableViewCell
         
@@ -77,5 +77,16 @@ class DirectionViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.backgroundColor = colorWithHexString(hex: "#FFA991")
         }
         return cell
+    }
+    
+    //Helper Functions
+    func addShadowFor(yourView: UIView) {
+        yourView.layer.shadowColor = UIColor.black.cgColor
+        yourView.layer.shadowOpacity = 0.5
+        yourView.layer.shadowOffset = CGSize(width: 5, height: 5)
+        yourView.layer.shadowRadius = 05
+        
+        yourView.layer.shadowPath = UIBezierPath(rect: yourView.bounds).cgPath
+        yourView.layer.shouldRasterize = true
     }
 }
