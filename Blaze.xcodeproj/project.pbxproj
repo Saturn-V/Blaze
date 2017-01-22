@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41101B13A73C06BF6C725E49 /* Pods_Cycl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80E75B6B023D9F7523A58659 /* Pods_Cycl.framework */; };
+		3F36AAC01E3437A300A189C2 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F36AABF1E3437A300A189C2 /* Keys.plist */; };
 		B43DBF441DEE356F0069430F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF431DEE356F0069430F /* AppDelegate.swift */; };
 		B43DBF461DEE356F0069430F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF451DEE356F0069430F /* MapViewController.swift */; };
 		B43DBF491DEE356F0069430F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B43DBF471DEE356F0069430F /* Main.storyboard */; };
 		B43DBF4C1DEE356F0069430F /* Cycl.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF4A1DEE356F0069430F /* Cycl.xcdatamodeld */; };
 		B43DBF4E1DEE356F0069430F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B43DBF4D1DEE356F0069430F /* Assets.xcassets */; };
 		B43DBF511DEE356F0069430F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B43DBF4F1DEE356F0069430F /* LaunchScreen.storyboard */; };
-		B43DBF591DF0D2B30069430F /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B43DBF581DF0D2B30069430F /* Keys.plist */; };
 		B43DBF6B1DF293710069430F /* MapViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF6A1DF293710069430F /* MapViewControllerDelegate.swift */; };
 		B43DBF751DF791D00069430F /* GoogleAPIWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DBF741DF791D00069430F /* GoogleAPIWrapper.swift */; };
 		B4AE9F401DFE1C2C00EB089C /* RouteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE9F3F1DFE1C2C00EB089C /* RouteType.swift */; };
@@ -26,9 +25,13 @@
 		E60CFA7F1E1301690087F1B3 /* DirectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60CFA7E1E1301690087F1B3 /* DirectionViewController.swift */; };
 		E60CFA811E13017D0087F1B3 /* DirectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60CFA801E13017D0087F1B3 /* DirectionTableViewCell.swift */; };
 		E66958F81E03BD35001861A2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66958F71E03BD35001861A2 /* SearchViewController.swift */; };
+		E69886C04E43EBC12BF612D0 /* Pods_Blaze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E63D871C103A5B3A5F1631E /* Pods_Blaze.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		289C972D0611B6C75E671533 /* Pods-Blaze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blaze.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Blaze/Pods-Blaze.debug.xcconfig"; sourceTree = "<group>"; };
+		3E63D871C103A5B3A5F1631E /* Pods_Blaze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blaze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F36AABF1E3437A300A189C2 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		794CACA256F2E341F3CB15C1 /* Pods-Cycl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cycl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cycl/Pods-Cycl.debug.xcconfig"; sourceTree = "<group>"; };
 		80E75B6B023D9F7523A58659 /* Pods_Cycl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cycl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B43DBF401DEE356F0069430F /* Blaze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blaze.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,11 +42,11 @@
 		B43DBF4D1DEE356F0069430F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B43DBF501DEE356F0069430F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B43DBF521DEE356F0069430F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B43DBF581DF0D2B30069430F /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		B43DBF6A1DF293710069430F /* MapViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerDelegate.swift; sourceTree = "<group>"; };
 		B43DBF741DF791D00069430F /* GoogleAPIWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAPIWrapper.swift; sourceTree = "<group>"; };
 		B4AE9F3F1DFE1C2C00EB089C /* RouteType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteType.swift; sourceTree = "<group>"; };
 		B4E9319C1DFC96EE0030F906 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		D6FEBC70E167BDFE0E1C1D1F /* Pods-Blaze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blaze.release.xcconfig"; path = "Pods/Target Support Files/Pods-Blaze/Pods-Blaze.release.xcconfig"; sourceTree = "<group>"; };
 		E4E6B9F172A256DD0CFCF2DF /* Pods-Cycl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cycl.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cycl/Pods-Cycl.release.xcconfig"; sourceTree = "<group>"; };
 		E6084C7B1E00779A00C07E10 /* LGHorizontalLinearFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGHorizontalLinearFlowLayout.swift; sourceTree = "<group>"; };
 		E6084C7D1E0077A000C07E10 /* RouteDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -59,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41101B13A73C06BF6C725E49 /* Pods_Cycl.framework in Frameworks */,
+				E69886C04E43EBC12BF612D0 /* Pods_Blaze.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +74,8 @@
 			children = (
 				794CACA256F2E341F3CB15C1 /* Pods-Cycl.debug.xcconfig */,
 				E4E6B9F172A256DD0CFCF2DF /* Pods-Cycl.release.xcconfig */,
+				289C972D0611B6C75E671533 /* Pods-Blaze.debug.xcconfig */,
+				D6FEBC70E167BDFE0E1C1D1F /* Pods-Blaze.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -106,7 +111,7 @@
 				B43DBF4D1DEE356F0069430F /* Assets.xcassets */,
 				B43DBF4F1DEE356F0069430F /* LaunchScreen.storyboard */,
 				B43DBF521DEE356F0069430F /* Info.plist */,
-				B43DBF581DF0D2B30069430F /* Keys.plist */,
+				3F36AABF1E3437A300A189C2 /* Keys.plist */,
 				B43DBF4A1DEE356F0069430F /* Cycl.xcdatamodeld */,
 			);
 			path = Cycl;
@@ -163,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				80E75B6B023D9F7523A58659 /* Pods_Cycl.framework */,
+				3E63D871C103A5B3A5F1631E /* Pods_Blaze.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -202,7 +208,7 @@
 				TargetAttributes = {
 					B43DBF3F1DEE356F0069430F = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 7QQX7GNST9;
+						DevelopmentTeam = CX3J8KNDJA;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -230,7 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B43DBF591DF0D2B30069430F /* Keys.plist in Resources */,
+				3F36AAC01E3437A300A189C2 /* Keys.plist in Resources */,
 				B43DBF511DEE356F0069430F /* LaunchScreen.storyboard in Resources */,
 				B43DBF4E1DEE356F0069430F /* Assets.xcassets in Resources */,
 				B43DBF491DEE356F0069430F /* Main.storyboard in Resources */,
@@ -252,7 +258,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cycl/Pods-Cycl-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Blaze/Pods-Blaze-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		521F7BC490D375382CB400DB /* [CP] Check Pods Manifest.lock */ = {
@@ -282,7 +288,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cycl/Pods-Cycl-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Blaze/Pods-Blaze-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -428,16 +434,16 @@
 		};
 		B43DBF561DEE356F0069430F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 794CACA256F2E341F3CB15C1 /* Pods-Cycl.debug.xcconfig */;
+			baseConfigurationReference = 289C972D0611B6C75E671533 /* Pods-Blaze.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CX3J8KNDJA;
 				INFOPLIST_FILE = Cycl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.miriamhendler.blaze;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.luhagel.blaze;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -447,16 +453,16 @@
 		};
 		B43DBF571DEE356F0069430F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4E6B9F172A256DD0CFCF2DF /* Pods-Cycl.release.xcconfig */;
+			baseConfigurationReference = D6FEBC70E167BDFE0E1C1D1F /* Pods-Blaze.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CX3J8KNDJA;
 				INFOPLIST_FILE = Cycl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.miriamhendler.blaze;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.luhagel.blaze;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

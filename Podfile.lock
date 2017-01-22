@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.1.0)
+  - Alamofire (4.3.0)
   - GoogleMaps (2.1.1):
     - GoogleMaps/Maps (= 2.1.1)
   - GoogleMaps/Base (2.1.1)
@@ -8,7 +8,7 @@ PODS:
   - GooglePlaces (2.1.1):
     - GoogleMaps/Base (= 2.1.1)
   - ScrollableGraphView (3.1.0)
-  - SwiftyJSON (3.1.1)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Alamofire
@@ -18,12 +18,12 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: e266cf991b933498df791e645e0d8ac294492153
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
   GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
   ScrollableGraphView: e2c8bedc7bbb643e8ac57b9456070d68355c4e4c
-  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 71f8c1c72bb2d0ccca932e83d97d048553798173
+PODFILE CHECKSUM: 8643acbea0fc8efbaad99153444b3d8a74993e46
 
 COCOAPODS: 1.1.1
